@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c588cn6yknnwf"]
+
+[ext_resource type="FontFile" uid="uid://q64e0a0vbgyn" path="res://fonts/Xolonium-Regular.ttf" id="1_fnwpe"]
+
+[resource]
+default_font = ExtResource("1_fnwpe")
+default_font_size = 96
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.862745)
+Label/constants/outline_size = 30
+Label/constants/shadow_offset_x = 10
+Label/constants/shadow_offset_y = 10
+Label/constants/shadow_outline_size = 30
+Label/font_sizes/font_size = 96
+Label/fonts/font = ExtResource("1_fnwpe")

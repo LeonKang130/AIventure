@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://ffjqwq4pr8nm"]
+
+[ext_resource type="StyleBox" uid="uid://dlo834nbmic8" path="res://styleboxes/grabber.tres" id="1_facl1"]
+[ext_resource type="StyleBox" uid="uid://diu084gf5e7jx" path="res://styleboxes/scroll.tres" id="2_lfxgd"]
+
+[resource]
+HScrollBar/styles/grabber = ExtResource("1_facl1")
+HScrollBar/styles/grabber_highlight = ExtResource("1_facl1")
+HScrollBar/styles/grabber_pressed = ExtResource("1_facl1")
+HScrollBar/styles/scroll = ExtResource("2_lfxgd")
