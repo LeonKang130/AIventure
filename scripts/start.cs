@@ -5,6 +5,9 @@ public partial class start : Node
 {
 	[Signal]
 	public delegate void VolumeChangedEventHandler(float value);
+
+	[Signal]
+	public delegate void StartGameEventHandler();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -16,9 +19,9 @@ public partial class start : Node
 	public override void _Process(double delta)
 	{
 	}
-
+	
 	public void OnQuitButtonPressed() => GetTree().Quit();
-
+	public void OnStartButtonPressed() => EmitSignal(SignalName.StartGame);
 	public void OnSettingsButtonPressed()
 	{
 		GetNode<CanvasLayer>("CanvasLayer/StartMenu").Hide();
@@ -35,5 +38,16 @@ public partial class start : Node
 	{
 		EmitSignal(SignalName.VolumeChanged, value);
 	}
-	public void Hide() => GetNode<CanvasLayer>("CanvasLayer").Hide();
+	public void Hide()
+	{
+		GetNode<CanvasLayer>("CanvasLayer").Hide();
+		GetNode<CanvasLayer>("CanvasLayer/StartMenu").Hide();
+		GetNode<CanvasLayer>("CanvasLayer/SettingsMenu").Hide();
+	}
+
+	public void Show()
+	{
+		GetNode<CanvasLayer>("CanvasLayer").Show();
+		GetNode<CanvasLayer>("CanvasLayer/StartMenu").Show();
+	}
 }

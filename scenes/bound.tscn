@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=3 uid="uid://wrslkt0kpuhl"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://crmbewurewwg5" path="res://physics/smooth.tres" id="1_hl8h0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2y8pg"]
+size = Vector2(384, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wavop"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3n12s"]
+size = Vector2(256, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c37it"]
+size = Vector2(128, 256)
+
+[node name="Bound" type="Node"]
+
+[node name="HWall1" type="StaticBody2D" parent="."]
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HWall1"]
+position = Vector2(192, 64)
+shape = SubResource("RectangleShape2D_2y8pg")
+
+[node name="HWall2" type="StaticBody2D" parent="."]
+position = Vector2(640, 0)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HWall2"]
+position = Vector2(192, 64)
+shape = SubResource("RectangleShape2D_2y8pg")
+
+[node name="HWall3" type="StaticBody2D" parent="."]
+position = Vector2(0, 896)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HWall3"]
+position = Vector2(192, 64)
+shape = SubResource("RectangleShape2D_2y8pg")
+
+[node name="HWall4" type="StaticBody2D" parent="."]
+position = Vector2(640, 896)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HWall4"]
+position = Vector2(192, 64)
+shape = SubResource("RectangleShape2D_2y8pg")
+
+[node name="VWall1" type="StaticBody2D" parent="."]
+position = Vector2(64, 256)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VWall1"]
+shape = SubResource("RectangleShape2D_wavop")
+
+[node name="VWall2" type="StaticBody2D" parent="."]
+position = Vector2(960, 256)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VWall2"]
+shape = SubResource("RectangleShape2D_wavop")
+
+[node name="VWall3" type="StaticBody2D" parent="."]
+position = Vector2(64, 768)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VWall3"]
+shape = SubResource("RectangleShape2D_wavop")
+
+[node name="VWall4" type="StaticBody2D" parent="."]
+position = Vector2(960, 768)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VWall4"]
+shape = SubResource("RectangleShape2D_wavop")
+
+[node name="HWall5" type="StaticBody2D" parent="."]
+position = Vector2(512, -64)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HWall5"]
+shape = SubResource("RectangleShape2D_3n12s")
+
+[node name="HWall6" type="StaticBody2D" parent="."]
+position = Vector2(512, 1088)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HWall6"]
+shape = SubResource("RectangleShape2D_3n12s")
+
+[node name="VWall5" type="StaticBody2D" parent="."]
+position = Vector2(-64, 512)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VWall5"]
+shape = SubResource("RectangleShape2D_c37it")
+
+[node name="VWall6" type="StaticBody2D" parent="."]
+position = Vector2(1088, 512)
+collision_mask = 2
+physics_material_override = ExtResource("1_hl8h0")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VWall6"]
+shape = SubResource("RectangleShape2D_c37it")

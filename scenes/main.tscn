@@ -21,5 +21,6 @@ script = ExtResource("1_h3m5j")
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7niyl")
 
+[connection signal="StartGame" from="Start" to="." method="OnStartGame"]
 [connection signal="VolumeChanged" from="Start" to="." method="OnVolumeSettingChanged"]
 [connection signal="finished" from="BGM" to="." method="OnBGMFinished"]

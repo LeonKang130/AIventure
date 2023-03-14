@@ -7,6 +7,8 @@ public partial class main : Node
 	public override void _Ready()
 	{
 		GetNode<AudioStreamPlayer2D>("BGM").Play();
+		GetNode<start>("Start").Show();
+		GetNode<wander>("Wander").Hide();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,6 +22,11 @@ public partial class main : Node
 		GetNode<AudioStreamPlayer2D>("BGM").VolumeDb = value == 0.001f ? -100.0f : Mathf.Log(value) * 5.0f;
 	}
 
+	public void OnStartGame()
+	{
+		GetNode<start>("Start").Hide();
+		GetNode<wander>("Wander").Show();
+	}
 	public void OnBGMFinished()
 	{
 		GetNode<AudioStreamPlayer2D>("BGM").Play();

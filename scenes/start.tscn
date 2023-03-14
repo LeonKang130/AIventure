@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2ikjdow436gs"]
 
 [ext_resource type="Script" path="res://scripts/start.cs" id="1_446tn"]
-[ext_resource type="Texture2D" uid="uid://s7us1ld86c0a" path="res://arts/StartMenuBackground.jpg" id="1_i0ir1"]
+[ext_resource type="Texture2D" uid="uid://5dnr4c2nq0i2" path="res://arts/splashscreen.png" id="2_ju3gp"]
 [ext_resource type="Theme" uid="uid://c588cn6yknnwf" path="res://themes/title.tres" id="3_5mow1"]
 [ext_resource type="Theme" uid="uid://qspkfo6ownp1" path="res://themes/button.tres" id="4_fjfvn"]
 [ext_resource type="Theme" uid="uid://dlpv1poq8gcth" path="res://themes/label.tres" id="5_02btf"]
@@ -18,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_i0ir1")
+texture = ExtResource("2_ju3gp")
 expand_mode = 5
 
 [node name="StartMenu" type="CanvasLayer" parent="CanvasLayer"]
@@ -84,6 +84,7 @@ theme = ExtResource("4_fjfvn")
 text = "Quit"
 
 [node name="SettingsMenu" type="CanvasLayer" parent="CanvasLayer"]
+visible = false
 
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/SettingsMenu"]
 anchors_preset = 14
@@ -135,6 +136,7 @@ grow_vertical = 2
 theme = ExtResource("4_fjfvn")
 text = "Back"
 
+[connection signal="pressed" from="CanvasLayer/StartMenu/StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="pressed" from="CanvasLayer/StartMenu/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="CanvasLayer/StartMenu/QuitButton" to="." method="OnQuitButtonPressed"]
 [connection signal="value_changed" from="CanvasLayer/SettingsMenu/HSplitContainer/MarginContainer/HScrollBar" to="." method="OnVolumeSettingChanged"]

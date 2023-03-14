@@ -1,3 +1,197 @@
-[gd_scene format=3 uid="uid://dehklsbkew86l"]
+[gd_scene load_steps=18 format=3 uid="uid://dehklsbkew86l"]
+
+[ext_resource type="Script" path="res://scripts/wander.cs" id="1_4s1lq"]
+[ext_resource type="Texture2D" uid="uid://j8cnd80vxmpw" path="res://arts/bricks.png" id="2_g4o47"]
+[ext_resource type="Texture2D" uid="uid://hw4h4l7ayhwc" path="res://arts/arrows.png" id="3_bhr2a"]
+[ext_resource type="Texture2D" uid="uid://cdiax4sm8rqx6" path="res://arts/obstacles.png" id="4_56brn"]
+[ext_resource type="PackedScene" uid="uid://c87788sbvyp36" path="res://scenes/player.tscn" id="5_broxm"]
+[ext_resource type="PackedScene" uid="uid://wrslkt0kpuhl" path="res://scenes/bound.tscn" id="6_4bo40"]
+[ext_resource type="Texture2D" uid="uid://s7us1ld86c0a" path="res://arts/StartMenuBackground.jpg" id="7_7eu17"]
+[ext_resource type="Theme" uid="uid://b40wn4cvxp7h6" path="res://themes/dialog_label.tres" id="8_0oaay"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_benua"]
+resource_name = "terrain"
+texture = ExtResource("2_g4o47")
+texture_region_size = Vector2i(48, 48)
+0:1/next_alternative_id = 2
+0:1/0 = 0
+0:1/1 = 1
+2:1/0 = 0
+3:1/0 = 0
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(1, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lrqri"]
+texture = ExtResource("3_bhr2a")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m30ln"]
+texture = ExtResource("4_56brn")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2tbgk"]
+tile_size = Vector2i(48, 48)
+sources/0 = SubResource("TileSetAtlasSource_benua")
+sources/2 = SubResource("TileSetAtlasSource_lrqri")
+sources/3 = SubResource("TileSetAtlasSource_m30ln")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0k04l"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hx78"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqiwb"]
+size = Vector2(256, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3v2j"]
+size = Vector2(256, 128)
+
+[sub_resource type="Theme" id="Theme_bqbep"]
 
 [node name="Wander" type="Node"]
+script = ExtResource("1_4s1lq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TileMap" type="TileMap" parent="CanvasLayer"]
+texture_repeat = 1
+scale = Vector2(2.667, 2.667)
+tile_set = SubResource("TileSet_2tbgk")
+format = 2
+layer_0/name = "terrain"
+layer_0/tile_data = PackedInt32Array(196610, 131072, 1, 196611, 131072, 1, 131075, 131072, 1, 131074, 131072, 1, 131073, 131072, 1, 65537, 131072, 1, 0, 131072, 1, 65536, 131072, 1, 131072, 131072, 1, 196609, 131072, 1, 262145, 131072, 1, 327681, 131072, 1, 327680, 131072, 1, 393216, 131072, 1, 393217, 131072, 1, 458753, 131072, 1, 458752, 131072, 1, 458754, 131072, 1, 393218, 131072, 1, 393219, 131072, 1, 327682, 131072, 1, 327683, 131072, 1, 262146, 131072, 1, 262147, 131072, 1, 65538, 131072, 1, 1, 131072, 1, 2, 131072, 1, 65539, 131072, 1, 65540, 131072, 1, 131076, 131072, 1, 196612, 131072, 1, 262148, 131072, 1, 327684, 131072, 1, 393220, 131072, 1, 458757, 131072, 1, 393221, 131072, 1, 327685, 131072, 1, 262149, 131072, 1, 196613, 131072, 1, 131077, 131072, 1, 65541, 131072, 1, 5, 131072, 1, 6, 131072, 1, 7, 131072, 1, 65543, 131072, 1, 65542, 131072, 1, 131078, 131072, 1, 131079, 131072, 1, 196614, 131072, 1, 262150, 131072, 1, 327686, 131072, 1, 327687, 131072, 1, 393223, 131072, 1, 393222, 131072, 1, 458758, 131072, 1, 458759, 131072, 1, 196608, 2, 1, 262144, 2, 1, 262151, 65538, 1, 196615, 65538, 1, 458756, 2, 0, 458755, 2, 0, 4, 65538, 0, 3, 65538, 0)
+layer_1/name = "bound"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(327680, 3, 0, 393216, 3, 0, 458752, 131075, 0, 458754, 65539, 0, 458753, 3, 0, 458757, 65539, 0, 458758, 3, 0, 458759, 131075, 0, 393223, 3, 0, 327687, 65539, 0, 131079, 131075, 0, 65543, 65539, 0, 7, 131075, 0, 6, 65539, 0, 5, 131075, 0, 2, 65539, 0, 1, 65539, 0, 0, 65539, 0, 65536, 65539, 0, 131072, 131075, 0)
+
+[node name="PortalLeft" type="Area2D" parent="CanvasLayer"]
+position = Vector2(0, 512)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/PortalLeft"]
+position = Vector2(64, 0)
+shape = SubResource("RectangleShape2D_0k04l")
+
+[node name="PortalRight" type="Area2D" parent="CanvasLayer"]
+position = Vector2(924, 512)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/PortalRight"]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_0hx78")
+
+[node name="PortalUp" type="Area2D" parent="CanvasLayer"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/PortalUp"]
+position = Vector2(512, 64)
+shape = SubResource("RectangleShape2D_eqiwb")
+
+[node name="PortalDown" type="Area2D" parent="CanvasLayer"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/PortalDown"]
+position = Vector2(512, 960)
+shape = SubResource("RectangleShape2D_h3v2j")
+
+[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog") instance=ExtResource("5_broxm")]
+position = Vector2(512, 512)
+Dialog = NodePath("../../Dialog")
+Speed = 512.0
+Direction = 3
+
+[node name="Bound" parent="." instance=ExtResource("6_4bo40")]
+
+[node name="PlayerSpawnLocations" type="Node" parent="."]
+
+[node name="SpawnLocationLeft" type="Marker2D" parent="PlayerSpawnLocations"]
+position = Vector2(1024, 1024)
+
+[node name="SpawnLocationRight" type="Marker2D" parent="PlayerSpawnLocations"]
+position = Vector2(1536, 1536)
+
+[node name="SpawnLocationUp" type="Marker2D" parent="PlayerSpawnLocations"]
+position = Vector2(2048, 2048)
+
+[node name="SpawnLocationDown" type="Marker2D" parent="PlayerSpawnLocations"]
+position = Vector2(2560, 2560)
+
+[node name="Dialog" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Dialog"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -240.0
+offset_right = 512.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.196078, 0.184314, 0.180392, 0.894118)
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Dialog"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -240.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.00117015
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_bqbep")
+
+[node name="PotraitMargin" type="MarginContainer" parent="Dialog/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="Dialog/HSplitContainer/PotraitMargin"]
+layout_mode = 2
+texture = ExtResource("7_7eu17")
+expand_mode = 3
+
+[node name="TextMargin" type="MarginContainer" parent="Dialog/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="Dialog/HSplitContainer/TextMargin"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("8_0oaay")
+text = "???: Where do you think you are going?"
+autowrap_mode = 3
+
+[node name="TextEdit" type="TextEdit" parent="Dialog/HSplitContainer/TextMargin"]
+visible = false
+layout_mode = 2
+
+[connection signal="body_entered" from="CanvasLayer/PortalUp" to="." method="OnEnterPortal"]

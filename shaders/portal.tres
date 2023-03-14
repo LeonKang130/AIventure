@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bmnuak433gywv"]
+
+[ext_resource type="Shader" path="res://shaders/portal.gdshader" id="1_pwbmr"]
+
+[resource]
+shader = ExtResource("1_pwbmr")
+shader_parameter/color = Vector3(0.8, 0.96, 0.9)
