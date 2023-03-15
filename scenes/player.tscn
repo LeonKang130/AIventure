@@ -175,7 +175,7 @@ Speed = 40.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.667, 2.667)
 sprite_frames = SubResource("SpriteFrames_t2ts2")
-animation = &"idle-left"
+animation = &"left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dehklsbkew86l"]
+[gd_scene load_steps=21 format=3 uid="uid://c1tr10nmmppqn"]
 
 [ext_resource type="Script" path="res://scripts/wander.cs" id="1_4s1lq"]
 [ext_resource type="Texture2D" uid="uid://j8cnd80vxmpw" path="res://arts/bricks.png" id="2_g4o47"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cdiax4sm8rqx6" path="res://arts/obstacles.png" id="4_56brn"]
 [ext_resource type="PackedScene" uid="uid://c87788sbvyp36" path="res://scenes/player.tscn" id="5_broxm"]
 [ext_resource type="PackedScene" uid="uid://wrslkt0kpuhl" path="res://scenes/bound.tscn" id="6_4bo40"]
-[ext_resource type="Texture2D" uid="uid://s7us1ld86c0a" path="res://arts/StartMenuBackground.jpg" id="7_7eu17"]
+[ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="6_pvx0g"]
+[ext_resource type="PackedScene" uid="uid://do6kye7qy7kjp" path="res://candles.tscn" id="7_c44oo"]
 [ext_resource type="Theme" uid="uid://b40wn4cvxp7h6" path="res://themes/dialog_label.tres" id="8_0oaay"]
+[ext_resource type="Texture2D" uid="uid://s7us1ld86c0a" path="res://arts/nazarec.jpg" id="8_6rv04"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_benua"]
 resource_name = "terrain"
@@ -60,6 +62,18 @@ size = Vector2(256, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3v2j"]
 size = Vector2(256, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wkcnm"]
+shader = ExtResource("6_pvx0g")
+shader_parameter/ambient = 0.1
+shader_parameter/exponent = 3.0
+shader_parameter/left_top_lit = true
+shader_parameter/left_bottom_lit = false
+shader_parameter/right_top_lit = false
+shader_parameter/right_bottom_lit = false
+shader_parameter/player_pos = Vector2(0.5, 0.5)
+shader_parameter/player_sight_radius = 0.3
+shader_parameter/light_effect_radius = 0.3
 
 [sub_resource type="Theme" id="Theme_bqbep"]
 
@@ -119,6 +133,24 @@ Dialog = NodePath("../../Dialog")
 Speed = 512.0
 Direction = 3
 
+[node name="Candles" parent="CanvasLayer" instance=ExtResource("7_c44oo")]
+z_index = 2
+position = Vector2(192, 192)
+scale = Vector2(2.66, 2.66)
+color = Color(0.847059, 0.517647, 0, 1)
+range_layer_max = 1
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer"]
+z_index = 2
+z_as_relative = false
+material = SubResource("ShaderMaterial_wkcnm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.776471)
+
 [node name="Bound" parent="." instance=ExtResource("6_4bo40")]
 
 [node name="PlayerSpawnLocations" type="Node" parent="."]
@@ -173,7 +205,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="TextureRect" type="TextureRect" parent="Dialog/HSplitContainer/PotraitMargin"]
 layout_mode = 2
-texture = ExtResource("7_7eu17")
+texture = ExtResource("8_6rv04")
 expand_mode = 3
 
 [node name="TextMargin" type="MarginContainer" parent="Dialog/HSplitContainer"]

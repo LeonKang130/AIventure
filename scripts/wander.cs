@@ -15,6 +15,12 @@ public partial class wander : Node
 		{
 			GetNode<CanvasLayer>("Dialog").Hide();
 		}
+
+		var material = GetNode<ColorRect>("CanvasLayer/Vignette").Material as ShaderMaterial;
+		if (material != null)
+		{
+			material.SetShaderParameter("player_pos", GetNode<player>("CanvasLayer/Player").Position / 1024);
+		}
 	}
 
 	public void Hide()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s7us1ld86c0a"
-path="res://.godot/imported/StartMenuBackground.jpg-bd32483ce41d575031f54c804ee2be69.ctex"
+uid="uid://m1pqbfm04na5"
+path="res://.godot/imported/light_mask.webp-56fff777c6fcf5cbd3a9e1cddb1e1307.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/StartMenuBackground.jpg"
-dest_files=["res://.godot/imported/StartMenuBackground.jpg-bd32483ce41d575031f54c804ee2be69.ctex"]
+source_file="res://arts/light_mask.webp"
+dest_files=["res://.godot/imported/light_mask.webp-56fff777c6fcf5cbd3a9e1cddb1e1307.ctex"]
 
 [params]
 

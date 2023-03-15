@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://do6kye7qy7kjp"]
+
+[ext_resource type="Texture2D" uid="uid://85ducxudsmof" path="res://arts/light.png" id="1_ob3d5"]
+[ext_resource type="Texture2D" uid="uid://m1pqbfm04na5" path="res://arts/light_mask.webp" id="1_qp88l"]
+[ext_resource type="Script" path="res://scripts/candles.cs" id="2_lbheq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpbem"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpp53"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q52vx"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7brmi"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctxb0"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ew2e"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(384, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8nge"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xda6u"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(192, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r270w"]
+atlas = ExtResource("1_ob3d5")
+region = Rect2(240, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5qlc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpbem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpp53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q52vx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7brmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctxb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ew2e")
+}],
+"loop": true,
+"name": &"campfire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8nge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xda6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r270w")
+}],
+"loop": true,
+"name": &"candles",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x845l"]
+radius = 18.0
+height = 38.0
+
+[node name="Candles" type="PointLight2D"]
+color = Color(1, 0.65098, 0.121569, 1)
+energy = 0.6
+texture = ExtResource("1_qp88l")
+script = ExtResource("2_lbheq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q5qlc")
+animation = &"campfire"
+frame_progress = 0.666345
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_x845l")
