@@ -3,7 +3,7 @@ using System;
 
 public partial class candles : PointLight2D
 {
-	private readonly string[] _animationNames = {"campfire", "candles"};
+	private readonly string[] _animationNames = {"campfire", "candles", "candles-alter", "lamp"};
 	private string _animationName;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

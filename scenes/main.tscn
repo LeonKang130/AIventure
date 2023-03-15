@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dcw5f2gony6jq" path="res://scenes/end.tscn" id="1_4celo"]
 [ext_resource type="Script" path="res://scripts/main.cs" id="1_h3m5j"]
 [ext_resource type="PackedScene" uid="uid://cas7w6wmv40v4" path="res://scenes/battle.tscn" id="2_grfl0"]
-[ext_resource type="PackedScene" uid="uid://c1tr10nmmppqn" path="res://scenes/wander.tscn" id="3_1xhcq"]
+[ext_resource type="PackedScene" uid="uid://dawpqismbqtyi" path="res://scenes/wander.tscn" id="3_1xhcq"]
 [ext_resource type="PackedScene" uid="uid://c2ikjdow436gs" path="res://scenes/start.tscn" id="4_3ay4c"]
 [ext_resource type="AudioStream" uid="uid://brk10eaj7sdc3" path="res://arts/House In a Forest Loop.ogg" id="6_7niyl"]
 

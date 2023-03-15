@@ -23,6 +23,6 @@ void fragment() {
 		mask += left_bottom_lit ? pow(max(1.0 - length(SCREEN_UV.xy - left_bottom_pos) / light_effect_radius, 0.0), exponent) : 0.0;
 		mask += right_top_lit ? pow(max(1.0 - length(SCREEN_UV.xy - right_top_pos) / light_effect_radius, 0.0), exponent) : 0.0;
 		mask += right_bottom_lit ? pow(max(1.0 - length(SCREEN_UV.xy - right_bottom_pos) / light_effect_radius, 0.0), exponent) : 0.0;
-		mask = min(1.0, mask);
+		mask = min(0.8, mask);
         COLOR = vec4(texture(screen_texture, SCREEN_UV).rgb * mask, 1.0);
 }
