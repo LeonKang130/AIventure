@@ -1,6 +1,6 @@
 import os
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 prompt = """
 你好，请你介绍一下chatGPT
