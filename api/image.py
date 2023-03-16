@@ -1,6 +1,6 @@
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 response = openai.Image.create(
   prompt="钢铁做的刀，木制的刀把", #A text description of the desired image(s). The maximum length is 1000 characters.
