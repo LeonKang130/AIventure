@@ -246,11 +246,13 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("8_0oaay")
-text = "???: Where do you think you are going?"
+theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
 
 [node name="TextEdit" type="TextEdit" parent="Dialog/HSplitContainer/TextMargin"]
 visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Enter your words here."
 
 [connection signal="body_entered" from="CanvasLayer/PortalUp" to="." method="OnEnterPortal"]
