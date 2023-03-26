@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dawpqismbqtyi"]
+[gd_scene load_steps=23 format=3 uid="uid://dm30dklrx00ly"]
 
 [ext_resource type="Script" path="res://scripts/wander.cs" id="1_4s1lq"]
 [ext_resource type="Texture2D" uid="uid://j8cnd80vxmpw" path="res://arts/bricks.png" id="2_g4o47"]
@@ -9,8 +9,9 @@
 [ext_resource type="Shader" path="res://shaders/vignette.gdshader" id="6_pvx0g"]
 [ext_resource type="PackedScene" uid="uid://do6kye7qy7kjp" path="res://scenes/light.tscn" id="7_c44oo"]
 [ext_resource type="Theme" uid="uid://b40wn4cvxp7h6" path="res://themes/dialog_label.tres" id="8_0oaay"]
-[ext_resource type="Texture2D" uid="uid://s7us1ld86c0a" path="res://arts/nazarec.jpg" id="8_6rv04"]
 [ext_resource type="PackedScene" uid="uid://d3humr7ks4a5d" path="res://scenes/npc.tscn" id="8_hcmi8"]
+[ext_resource type="Texture2D" uid="uid://cy0phk1nrfwb0" path="res://arts/portrait-slime.png" id="10_mieq7"]
+[ext_resource type="Theme" uid="uid://qspkfo6ownp1" path="res://themes/button.tres" id="12_htgh7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_benua"]
 resource_name = "terrain"
@@ -177,6 +178,7 @@ color = Color(0, 0, 0, 0.776471)
 
 [node name="NPC" parent="CanvasLayer" instance=ExtResource("8_hcmi8")]
 position = Vector2(320, 320)
+CharacterName = "Harold"
 
 [node name="Bound" parent="." instance=ExtResource("6_4bo40")]
 
@@ -195,7 +197,6 @@ position = Vector2(2048, 2048)
 position = Vector2(2560, 2560)
 
 [node name="Dialog" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Dialog"]
 anchors_preset = 7
@@ -223,16 +224,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_bqbep")
 
-[node name="PotraitMargin" type="MarginContainer" parent="Dialog/HSplitContainer"]
+[node name="PortraitMargin" type="MarginContainer" parent="Dialog/HSplitContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="TextureRect" type="TextureRect" parent="Dialog/HSplitContainer/PotraitMargin"]
+[node name="TextureRect" type="TextureRect" parent="Dialog/HSplitContainer/PortraitMargin"]
 layout_mode = 2
-texture = ExtResource("8_6rv04")
+texture = ExtResource("10_mieq7")
 expand_mode = 3
 
 [node name="TextMargin" type="MarginContainer" parent="Dialog/HSplitContainer"]
@@ -250,9 +251,54 @@ theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
 
 [node name="TextEdit" type="TextEdit" parent="Dialog/HSplitContainer/TextMargin"]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Enter your words here."
 
+[node name="Pause" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Pause"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.211765, 0.211765, 0.211765, 0.717647)
+
+[node name="QuitButton" type="Button" parent="Pause/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -128.0
+offset_right = 69.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_htgh7")
+text = "Quit"
+
+[node name="ResumeButton" type="Button" parent="Pause/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.5
+offset_top = 71.0
+offset_right = 135.5
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_htgh7")
+text = "Resume"
+
 [connection signal="body_entered" from="CanvasLayer/PortalUp" to="." method="OnEnterPortal"]
+[connection signal="PlayerEnter" from="CanvasLayer/NPC" to="." method="OnNPCPlayerEnter"]
+[connection signal="PlayerExit" from="CanvasLayer/NPC" to="." method="OnNPCPlayerExit"]

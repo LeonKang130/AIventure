@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s7us1ld86c0a"
-path="res://.godot/imported/nazarec.jpg-f333677929ef0daae420db769d267feb.ctex"
+uid="uid://c7opun2tp62yd"
+path="res://.godot/imported/portrait-harold.png-942d39e519cdf8ddad2ffc9b66771ed4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/nazarec.jpg"
-dest_files=["res://.godot/imported/nazarec.jpg-f333677929ef0daae420db769d267feb.ctex"]
+source_file="res://arts/portrait-harold.png"
+dest_files=["res://.godot/imported/portrait-harold.png-942d39e519cdf8ddad2ffc9b66771ed4.ctex"]
 
 [params]
 
