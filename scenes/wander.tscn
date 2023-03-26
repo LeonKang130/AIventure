@@ -220,7 +220,6 @@ anchor_bottom = 1.0
 offset_top = -240.0
 grow_horizontal = 2
 grow_vertical = 0
-rotation = -0.00117015
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_bqbep")
@@ -252,6 +251,7 @@ theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
 
 [node name="TextEdit" type="TextEdit" parent="Dialog/HSplitContainer/TextMargin"]
+light_mask = 0
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Enter your words here."
@@ -300,18 +300,6 @@ grow_vertical = 2
 theme = ExtResource("12_htgh7")
 text = "Resume"
 
-[node name="Transition" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="Transition"]
-light_mask = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.101961, 0.101961, 0.101961, 0.92549)
-
 [connection signal="body_entered" from="CanvasLayer/PortalLeft" to="." method="OnEnterPortalLeft"]
 [connection signal="body_exited" from="CanvasLayer/PortalLeft" to="." method="OnExitPortal"]
 [connection signal="body_entered" from="CanvasLayer/PortalRight" to="." method="OnEnterPortalRight"]
@@ -322,3 +310,5 @@ color = Color(0.101961, 0.101961, 0.101961, 0.92549)
 [connection signal="body_exited" from="CanvasLayer/PortalDown" to="." method="OnExitPortal"]
 [connection signal="PlayerEnter" from="CanvasLayer/NPC" to="." method="OnNPCPlayerEnter"]
 [connection signal="PlayerExit" from="CanvasLayer/NPC" to="." method="OnNPCPlayerExit"]
+[connection signal="pressed" from="Pause/ColorRect/QuitButton" to="." method="OnBackToMainMenuButtonPressed"]
+[connection signal="pressed" from="Pause/ColorRect/ResumeButton" to="." method="OnResumeButtonPressed"]

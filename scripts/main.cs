@@ -9,6 +9,7 @@ public partial class main : Node
 		GetNode<AudioStreamPlayer2D>("BGM").Play();
 		GetNode<start>("Start").Show();
 		GetNode<wander>("Wander").Hide();
+		GetNode<wander>("Wander").SetProcess(false);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +28,15 @@ public partial class main : Node
 		GetNode<start>("Start").Hide();
 		var wander = GetNode<wander>("Wander");
 		wander.Show();
+		wander.SetProcess(true);
+	}
+
+	public void OnBackToMainMenu()
+	{
+		GetNode<start>("Start").Show();
+		var wander = GetNode<wander>("Wander");
+		wander.Hide();
+		GetNode<wander>("Wander").SetProcess(false);
 	}
 	public void OnBGMFinished()
 	{
