@@ -177,7 +177,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.776471)
 
 [node name="NPC" parent="CanvasLayer" instance=ExtResource("8_hcmi8")]
-position = Vector2(320, 320)
+position = Vector2(384, 384)
 CharacterName = "Harold"
 
 [node name="Bound" parent="." instance=ExtResource("6_4bo40")]
@@ -185,18 +185,19 @@ CharacterName = "Harold"
 [node name="PlayerSpawnLocations" type="Node" parent="."]
 
 [node name="SpawnLocationLeft" type="Marker2D" parent="PlayerSpawnLocations"]
-position = Vector2(1024, 1024)
+position = Vector2(192, 512)
 
 [node name="SpawnLocationRight" type="Marker2D" parent="PlayerSpawnLocations"]
-position = Vector2(1536, 1536)
+position = Vector2(828, 512)
 
 [node name="SpawnLocationUp" type="Marker2D" parent="PlayerSpawnLocations"]
-position = Vector2(2048, 2048)
+position = Vector2(512, 196)
 
 [node name="SpawnLocationDown" type="Marker2D" parent="PlayerSpawnLocations"]
-position = Vector2(2560, 2560)
+position = Vector2(512, 828)
 
 [node name="Dialog" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Dialog"]
 anchors_preset = 7
@@ -299,6 +300,25 @@ grow_vertical = 2
 theme = ExtResource("12_htgh7")
 text = "Resume"
 
-[connection signal="body_entered" from="CanvasLayer/PortalUp" to="." method="OnEnterPortal"]
+[node name="Transition" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+light_mask = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.101961, 0.92549)
+
+[connection signal="body_entered" from="CanvasLayer/PortalLeft" to="." method="OnEnterPortalLeft"]
+[connection signal="body_exited" from="CanvasLayer/PortalLeft" to="." method="OnExitPortal"]
+[connection signal="body_entered" from="CanvasLayer/PortalRight" to="." method="OnEnterPortalRight"]
+[connection signal="body_exited" from="CanvasLayer/PortalRight" to="." method="OnExitPortal"]
+[connection signal="body_entered" from="CanvasLayer/PortalUp" to="." method="OnEnterPortalUp"]
+[connection signal="body_exited" from="CanvasLayer/PortalUp" to="." method="OnExitPortal"]
+[connection signal="body_entered" from="CanvasLayer/PortalDown" to="." method="OnEnterPortalDown"]
+[connection signal="body_exited" from="CanvasLayer/PortalDown" to="." method="OnExitPortal"]
 [connection signal="PlayerEnter" from="CanvasLayer/NPC" to="." method="OnNPCPlayerEnter"]
 [connection signal="PlayerExit" from="CanvasLayer/NPC" to="." method="OnNPCPlayerExit"]

@@ -13,6 +13,8 @@ public partial class player : RigidBody2D
 	}
 	[Export] public float Speed;
 	[Export] public FacingDirection Direction;
+	public bool ResetState = false;
+	public Transform2D NextTransform;
 	private AnimatedSprite2D _animatedSprite2D;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -21,6 +23,13 @@ public partial class player : RigidBody2D
 		Direction = FacingDirection.Down;
 	}
 
+	public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+	{
+		if (!ResetState) return;
+		state.Transform = NextTransform;
+		state.LinearVelocity = Vector2.Zero;
+		ResetState = false;
+	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{

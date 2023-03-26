@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vr53ovq3ln85"
-path="res://.godot/imported/portrait-nazarec.png-4c96786476fac19930e582bb91e6981e.ctex"
+path="res://.godot/imported/portrait-nezarec.png-aa98f6ae9ec6f0ee2e8f8005b6d555c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://arts/portrait-nazarec.png"
-dest_files=["res://.godot/imported/portrait-nazarec.png-4c96786476fac19930e582bb91e6981e.ctex"]
+source_file="res://arts/portrait-nezarec.png"
+dest_files=["res://.godot/imported/portrait-nezarec.png-aa98f6ae9ec6f0ee2e8f8005b6d555c5.ctex"]
 
 [params]
 

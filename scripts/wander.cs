@@ -17,25 +17,29 @@ public struct CharacterInfo
 
 public partial class wander : Node
 {
+	public bool[] PortalUsable = { true, true, true, true };
 	public string? InteractableCharacterName;
-	Queue<Tuple<string, string>> FixedDialogQueue = new();
+	public Action InteractCallback = () => { };
+	public Queue<Tuple<string, string>> FixedDialogQueue = new();
 	Dictionary<string, CharacterInfo> CharacterDictionary = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		CharacterDictionary.Add("slime", new CharacterInfo("Slime", "arts/portrait-slime.png"));
-		CharacterDictionary.Add("nazarec", new CharacterInfo("Nazarec", "arts/portrait-nazarec.png"));
+		CharacterDictionary.Add("nezarec", new CharacterInfo("Nezarec", "arts/portrait-nezarec.png"));
 		CharacterDictionary.Add("harold", new CharacterInfo("Harold", "arts/portrait-harold.png"));
 		FixedDialogQueue.Enqueue(Tuple.Create("Slime", "Damn, I'm gonna be late for the presentation for the boss!"));
 		FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I'm on my first day at this post. I must not get myself fired so soon."));
 		FixedDialogQueue.Enqueue(Tuple.Create("Slime", "Shit! Where should I go?!"));
+		IsPlayingFixedConversation = FixedDialogQueue.Count != 0;
 	}
 
-	private bool IsListening => GetNode<Label>("Dialog/HSplitContainer/TextMargin/Label").Visible;
-	private bool IsSpeaking => GetNode<TextEdit>("Dialog/HSplitContainer/TextMargin/TextEdit").Visible;
+	private bool IsListening => IsInConversation && GetNode<Label>("Dialog/HSplitContainer/TextMargin/Label").Visible;
+	private bool IsSpeaking => IsInConversation && GetNode<TextEdit>("Dialog/HSplitContainer/TextMargin/TextEdit").Visible;
 	private bool IsInConversation => GetNode<CanvasLayer>("Dialog").Visible;
 	private bool IsWaitingForResponse = false;
-	private void ShowListeningText(string name, string text)
+	private bool IsPlayingFixedConversation = false;
+	void ShowListeningText(string name, string text)
 	{
 		GetNode<TextureRect>("Dialog/HSplitContainer/PortraitMargin/TextureRect").Texture = CharacterDictionary[name.ToLower()].portrait;
 		GetNode<CanvasLayer>("Dialog").Show();
@@ -64,6 +68,8 @@ public partial class wander : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		// Play introduction
+		if (!GetNode<CanvasLayer>("CanvasLayer").Visible) return;
 		// Press enter when the player is speaking
 		// Exit conversation if the player says nothing
 		if (IsSpeaking && Input.IsActionJustPressed("continue_dialog"))
@@ -94,19 +100,18 @@ public partial class wander : Node
 			}
 			else if (Input.IsActionJustPressed("continue_dialog"))
 			{
-				if (FixedDialogQueue.Count != 0)
+				if (IsPlayingFixedConversation)
 				{
-					FixedDialogQueue.Dequeue();
 					if (FixedDialogQueue.Count == 0)
 					{
+						IsPlayingFixedConversation = false;
 						GetNode<CanvasLayer>("Dialog").Hide();
 					}
 					else
 					{
-						var (name, text) = FixedDialogQueue.First();
+						var (name, text) = FixedDialogQueue.Dequeue();
 						ShowListeningText(name, text);
 					}
-					
 				}
 				else
 				{
@@ -124,10 +129,14 @@ public partial class wander : Node
 		// Interact with NPC
 		if (!IsInConversation && Input.IsActionJustPressed("interact"))
 		{
-			if (InteractableCharacterName != null)
-			{
-				ShowSpeakingText();
-			}
+			InteractCallback();
+		}
+
+		if (!IsInConversation && FixedDialogQueue.Count != 0)
+		{
+			IsPlayingFixedConversation = true;
+			var (name, text) = FixedDialogQueue.Dequeue();
+			ShowListeningText(name, text);
 		}
 		// Shader
 		var material = GetNode<ColorRect>("CanvasLayer/Vignette").Material as ShaderMaterial;
@@ -143,27 +152,123 @@ public partial class wander : Node
 	public void Show()
 	{
 		GetNode<CanvasLayer>("CanvasLayer").Show();
-		if (FixedDialogQueue.Count != 0)
-		{
-			var (name, text) = FixedDialogQueue.First();
-			ShowListeningText(name, text);
-		}
 	}
 
-	public void OnEnterPortal(Node2D _)
+	public void OnEnterPortalUp(Node2D _)
 	{
-		InteractableCharacterName = "Nazarec";
-		ShowListeningText("Nazarec","Where do you think you are going?");
+		var player = GetNode<player>("CanvasLayer/Player");
+		if (PortalUsable[0])
+		{
+			InteractCallback = () =>
+			{
+				player.NextTransform = player.Transform;
+				player.NextTransform = player.NextTransform.Translated(
+					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationDown").Position -
+					player.Position);
+				player.Direction = player.FacingDirection.Up;
+				player.ResetState = true;
+				InteractCallback = () => { };
+			};
+		}
+		else
+		{
+			InteractCallback = () =>
+			{
+				FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door."));
+			};
+		}
+		
+	}
+	public void OnEnterPortalRight(Node2D _)
+	{
+		var player = GetNode<player>("CanvasLayer/Player");
+		if (PortalUsable[1])
+		{
+			InteractCallback = () =>
+			{
+				player.NextTransform = player.Transform;
+				player.NextTransform = player.NextTransform.Translated(
+					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationLeft").Position -
+					player.Position);
+				player.Direction = player.FacingDirection.Right;
+				player.ResetState = true;
+				InteractCallback = () => { };
+			};
+		}
+		else
+		{
+			InteractCallback = () =>
+			{
+				FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door."));
+			};
+		}
+		
+	}
+	public void OnEnterPortalDown(Node2D _)
+	{
+		var player = GetNode<player>("CanvasLayer/Player");
+		if (PortalUsable[2])
+		{
+			InteractCallback = () =>
+			{
+				player.NextTransform = player.Transform;
+				player.NextTransform = player.NextTransform.Translated(
+					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationUp").Position -
+					player.Position);
+				player.Direction = player.FacingDirection.Down;
+				player.ResetState = true;
+				InteractCallback = () => { };
+			};
+		}
+		else
+		{
+			InteractCallback = () =>
+			{
+				FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door."));
+			};
+		}
+		
+	}
+	public void OnEnterPortalLeft(Node2D _)
+	{
+		var player = GetNode<player>("CanvasLayer/Player");
+		if (PortalUsable[3])
+		{
+			InteractCallback = () =>
+			{
+				player.NextTransform = player.Transform;
+				player.NextTransform = player.NextTransform.Translated(
+					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationRight").Position -
+					player.Position);
+				player.Direction = player.FacingDirection.Left;
+				player.ResetState = true;
+				InteractCallback = () => { };
+			};
+		}
+		else
+		{
+			InteractCallback = () =>
+			{
+				FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door."));
+			};
+		}
+		
+	}
+	public void OnExitPortal(Node2D _)
+	{
+		InteractCallback = () => { };
 	}
 	public void OnNPCPlayerEnter(string name)
 	{
 		InteractableCharacterName = name;
+		InteractCallback = ShowSpeakingText;
 	}
 	public void OnNPCPlayerExit(string name)
 	{
-		if (InteractableCharacterName != null && InteractableCharacterName.CasecmpTo(name) == 0)
+		if (InteractableCharacterName == name)
 		{
 			InteractableCharacterName = null;
+			InteractCallback = () => { };
 		}
 	}
 }

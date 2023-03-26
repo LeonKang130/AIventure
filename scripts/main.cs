@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 public partial class main : Node
@@ -24,7 +25,8 @@ public partial class main : Node
 	public void OnStartGame()
 	{
 		GetNode<start>("Start").Hide();
-		GetNode<wander>("Wander").Show();
+		var wander = GetNode<wander>("Wander");
+		wander.Show();
 	}
 	public void OnBGMFinished()
 	{

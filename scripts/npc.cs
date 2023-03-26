@@ -35,24 +35,12 @@ public partial class npc : Area2D
 		_emotion.Show();
 		_emotion.Frame = 0;
 		EmitSignal(SignalName.PlayerEnter, CharacterName);
-		// Wrong
-		// if (Input.IsActionPressed("start_continue_dialog"))
-		// {
-		//     GetParent<CanvasLayer>()
-		//     .GetParent<wander>()
-		//     .GetNode<CanvasLayer>("Dialog").Show();
-
-		//     GetParent<CanvasLayer>()
-		//     .GetParent<wander>()
-		//     .GetNode<Label>("Dialog/HSplitContainer/TextMargin/Label").Text
-		//     = "Harold: What the hell??? Where am I??? Who are you???";
-		// }
 	}
 
 	public void OnPlayerExitArea(Node2D _)
 	{
 		Triggered = false;
 		_emotion.Hide();
-		EmitSignal(SignalName.PlayerEnter, CharacterName);
+		EmitSignal(SignalName.PlayerExit, CharacterName);
 	}
 }
