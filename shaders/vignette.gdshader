@@ -7,6 +7,7 @@ uniform bool left_top_lit = false;
 uniform bool left_bottom_lit = false;
 uniform bool right_top_lit = false;
 uniform bool right_bottom_lit = false;
+uniform bool player_lit = true;
 uniform vec2 player_pos = vec2(0.5);
 uniform float player_sight_radius = 0.3;
 uniform float light_effect_radius = 0.3;
@@ -17,8 +18,7 @@ const vec2 right_top_pos = 1.0 - left_bottom_pos;
 const vec2 right_bottom_pos = 1.0 - left_top_pos;
 
 void fragment() {
-		float radius = length(SCREEN_UV.xy - 0.5);
-		float mask = ambient + pow(max(1.0 - length(SCREEN_UV.xy - player_pos) / player_sight_radius, 0.0), exponent);
+		float mask = ambient + (player_lit ? pow(max(1.0 - length(SCREEN_UV.xy - player_pos) / player_sight_radius, 0.0), exponent) : 0.0);
 		mask += left_top_lit ? pow(max(1.0 - length(SCREEN_UV.xy - left_top_pos) / light_effect_radius, 0.0), exponent) : 0.0;
 		mask += left_bottom_lit ? pow(max(1.0 - length(SCREEN_UV.xy - left_bottom_pos) / light_effect_radius, 0.0), exponent) : 0.0;
 		mask += right_top_lit ? pow(max(1.0 - length(SCREEN_UV.xy - right_top_pos) / light_effect_radius, 0.0), exponent) : 0.0;

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class main : Node
@@ -41,5 +42,21 @@ public partial class main : Node
 	public void OnBGMFinished()
 	{
 		GetNode<AudioStreamPlayer2D>("BGM").Play();
+	}
+
+	public void OnTransitionTriggered()
+	{
+		Task.Run(async () =>
+		{
+			GetNode<CanvasLayer>("Transition").Show();
+			(GetNode<ColorRect>("Transition/ColorRect").Material as ShaderMaterial)?.SetShaderParameter("opacity", 1.0f);
+			await Task.Delay(200);
+			for (int i = 0; i < 10; i++)
+			{
+				(GetNode<ColorRect>("Transition/ColorRect").Material as ShaderMaterial)?.SetShaderParameter("opacity", 1.0 - i * 0.1f);
+				await Task.Delay(20);
+			}
+			GetNode<CanvasLayer>("Transition").Hide();
+		});
 	}
 }

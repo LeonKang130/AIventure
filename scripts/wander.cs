@@ -26,6 +26,8 @@ public partial class wander : Node
 	[Signal]
 	public delegate void BackToMainMenuEventHandler();
 
+	[Signal]
+	public delegate void TransitionTriggeredEventHandler();
 	private CanvasLayer Dialog => GetNode<CanvasLayer>("Dialog");
 
 	private Label ListeningLabel =>
@@ -181,6 +183,7 @@ public partial class wander : Node
 		{
 			InteractCallback = () =>
 			{
+				EmitSignal(SignalName.TransitionTriggered);
 				player.NextTransform = player.Transform;
 				player.NextTransform = player.NextTransform.Translated(
 					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationDown").Position -
@@ -203,6 +206,7 @@ public partial class wander : Node
 		{
 			InteractCallback = () =>
 			{
+				EmitSignal(SignalName.TransitionTriggered);
 				player.NextTransform = player.Transform;
 				player.NextTransform = player.NextTransform.Translated(
 					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationLeft").Position -
@@ -225,6 +229,7 @@ public partial class wander : Node
 		{
 			InteractCallback = () =>
 			{
+				EmitSignal(SignalName.TransitionTriggered);
 				player.NextTransform = player.Transform;
 				player.NextTransform = player.NextTransform.Translated(
 					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationUp").Position -
@@ -247,6 +252,7 @@ public partial class wander : Node
 		{
 			InteractCallback = () =>
 			{
+				EmitSignal(SignalName.TransitionTriggered);
 				player.NextTransform = player.Transform;
 				player.NextTransform = player.NextTransform.Translated(
 					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationRight").Position -

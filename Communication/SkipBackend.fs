@@ -2,6 +2,7 @@
 open System
 open System.Collections.Generic
 open System.IO
+open System.Threading.Tasks
 open FSharp.Core
 open Microsoft.FSharp.Collections
 open OpenAI
@@ -83,11 +84,17 @@ type ChatBotHandler() =
                 setting :: cache @ [queryPrompt]
                 |> ChatRequest
                 |> API.ChatEndpoint.GetCompletionAsync
-            let response = result.FirstChoice.Message.Content
-            let cache =
-                cache @ [queryPrompt; ChatPrompt("assistant", response)]
-                |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
-            this.ConversationCache[key] <- cache
-            return response
+                |> Async.AwaitTask
+                |> Async.Catch
+            match result with
+            | Choice1Of2 chatResponse ->
+                let response = chatResponse.FirstChoice.Message.Content
+                let cache =
+                    cache @ [queryPrompt; ChatPrompt("assistant", response)]
+                    |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
+                this.ConversationCache[key] <- cache
+                return response
+            | Choice2Of2 _ ->
+                return "(unrecognized mumbling...)"
         }
     

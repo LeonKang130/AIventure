@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://lk32str82dts"]
+[gd_scene load_steps=9 format=3 uid="uid://lk32str82dts"]
 
 [ext_resource type="PackedScene" uid="uid://dcw5f2gony6jq" path="res://scenes/end.tscn" id="1_4celo"]
 [ext_resource type="Script" path="res://scripts/main.cs" id="1_h3m5j"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dm30dklrx00ly" path="res://scenes/wander.tscn" id="3_1xhcq"]
 [ext_resource type="PackedScene" uid="uid://c2ikjdow436gs" path="res://scenes/start.tscn" id="4_3ay4c"]
 [ext_resource type="AudioStream" uid="uid://brk10eaj7sdc3" path="res://arts/House In a Forest Loop.ogg" id="6_7niyl"]
+[ext_resource type="Shader" path="res://shaders/fade.gdshader" id="7_q6md3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgkls"]
+shader = ExtResource("7_q6md3")
+shader_parameter/opacity = 0.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_h3m5j")
@@ -21,7 +26,20 @@ script = ExtResource("1_h3m5j")
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7niyl")
 
+[node name="Transition" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Transition"]
+light_mask = 0
+material = SubResource("ShaderMaterial_sgkls")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="BackToMainMenu" from="Wander" to="." method="OnBackToMainMenu"]
+[connection signal="TransitionTriggered" from="Wander" to="." method="OnTransitionTriggered"]
 [connection signal="StartGame" from="Start" to="." method="OnStartGame"]
 [connection signal="VolumeChanged" from="Start" to="." method="OnVolumeSettingChanged"]
 [connection signal="finished" from="BGM" to="." method="OnBGMFinished"]

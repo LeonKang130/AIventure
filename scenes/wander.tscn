@@ -73,6 +73,7 @@ shader_parameter/left_top_lit = true
 shader_parameter/left_bottom_lit = true
 shader_parameter/right_top_lit = true
 shader_parameter/right_bottom_lit = true
+shader_parameter/player_lit = true
 shader_parameter/player_pos = Vector2(0.5, 0.5)
 shader_parameter/player_sight_radius = 0.3
 shader_parameter/light_effect_radius = 0.5
@@ -197,6 +198,7 @@ position = Vector2(512, 196)
 position = Vector2(512, 828)
 
 [node name="Dialog" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Dialog"]
 anchors_preset = 7
