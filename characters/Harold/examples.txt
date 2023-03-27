@@ -1,0 +1,4 @@
+﻿user:Hello? Who are you?
+assistant:I'm an adventurer.
+user:Are there traps around?
+assistant:Yes, there is one in the North.

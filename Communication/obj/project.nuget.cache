@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "KJE9L+ut5Any8NuHMllBCf2Byf4T7wUsZ64/WlnMd8dWvkQYhfTumtuXZra3FuEHawSIyTmOvETG+NA5DZFjuA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kang\\.nuget\\packages\\fsharp.core\\7.0.0\\fsharp.core.7.0.0.nupkg.sha512",
+    "C:\\Users\\kang\\.nuget\\packages\\openai-dotnet\\6.5.0\\openai-dotnet.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
