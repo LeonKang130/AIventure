@@ -85,7 +85,7 @@ type ChatBotHandler() =
                 |> ChatRequest
                 |> API.ChatEndpoint.GetCompletionAsync
                 |> Async.AwaitTask
-                |> Async.Catch
+                |> Async.Catch // Catch exception due to network error
             match result with
             | Choice1Of2 chatResponse ->
                 let response = chatResponse.FirstChoice.Message.Content
