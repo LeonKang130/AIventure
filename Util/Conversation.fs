@@ -53,8 +53,8 @@ type ConversationManager(dialog: CanvasLayer) =
         | Inactive | NPCWaiting -> ()
         | NPCSpeaking ->
             if prioritized.Length <> 0 then
-                let character, message = prioritized.Head
-                prioritized <- prioritized |> List.skip 1
+                let (character, message) :: successors = prioritized
+                prioritized <- successors
                 streamed <- true
                 this.ShowMessage character message
             else if streamed then
@@ -95,8 +95,8 @@ type ConversationManager(dialog: CanvasLayer) =
         match current with
         | Inactive ->
             if prioritized.Length <> 0 then
-                let character, message = prioritized.Head
-                prioritized <- prioritized |> List.skip 1
+                let (character, message) :: successors = prioritized
+                prioritized <- successors
                 streamed <- true
                 this.ShowMessage character message
         | _ -> ()
