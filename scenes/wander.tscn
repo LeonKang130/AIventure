@@ -130,9 +130,10 @@ collision_mask = 2
 position = Vector2(512, 960)
 shape = SubResource("RectangleShape2D_h3v2j")
 
-[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog") instance=ExtResource("5_broxm")]
+[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog", "Pause") instance=ExtResource("5_broxm")]
 position = Vector2(512, 512)
 Dialog = NodePath("../../Dialog")
+Pause = NodePath("../../Pause")
 Speed = 512.0
 Direction = 3
 

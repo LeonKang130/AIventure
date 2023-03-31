@@ -2,7 +2,6 @@
 open System
 open System.Collections.Generic
 open System.IO
-open System.Threading.Tasks
 open FSharp.Core
 open Microsoft.FSharp.Collections
 open OpenAI
@@ -25,7 +24,7 @@ type ChatBotHandler() =
             ChatPrompt("user", "Is it safe around here?")
             ChatPrompt("assistant", "It's none of my business.")
         ]
-    let API = "[<YOUR KEY HERE>]" |> OpenAIClient
+    let API = "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" |> OpenAIClient
     member this.ConversationSettings =
         if Directory.Exists "characters" then
             Directory.EnumerateDirectories "characters"
@@ -36,7 +35,7 @@ type ChatBotHandler() =
                     |> Array.last
                     |> fun x -> x.Trim().ToLower()
                 let setting =
-                    [|path; "examples.txt"|]
+                    [| path; "examples.txt" |]
                     |> Path.Join
                     |> File.ReadAllText
                     |> fun message -> ChatPrompt("system", message)
@@ -76,8 +75,8 @@ type ChatBotHandler() =
             Dictionary<string, ChatPrompt list>()
     member this.GetAPIResponse (character: string) (query: string) =
         task {
-            let setting = this.ConversationSettings.GetValueOrDefault (character, DefaultSetting)
             let key = character.ToLower()
+            let setting = this.ConversationSettings.GetValueOrDefault (key, DefaultSetting)
             let cache = this.ConversationCache.GetValueOrDefault (key, DefaultCache)
             let queryPrompt = ChatPrompt("user", query)
             let! result =

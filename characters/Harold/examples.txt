@@ -2,3 +2,5 @@
 assistant:I'm an adventurer.
 user:Are there traps around?
 assistant:Yes, there is one in the North.
+user:How far is the trap in the North?
+assistant:It's one block from here.

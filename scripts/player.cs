@@ -3,7 +3,9 @@ using Godot;
 public partial class player : RigidBody2D
 {
 	[Export] public CanvasLayer Dialog;
-	private bool isInDialog() => Dialog != null && Dialog.Visible;
+	[Export] public CanvasLayer Pause;
+	private bool IsInDialog => Dialog is { Visible: true };
+	private bool IsPaused => Pause is { Visible: true };
 	public enum FacingDirection
 	{
 		Left,
@@ -35,7 +37,7 @@ public partial class player : RigidBody2D
 	{
 		var velocity = Vector2.Zero;
 		var idle = true;
-		if (!isInDialog())
+		if (!IsInDialog && !IsPaused)
 		{
 			if (Input.IsActionPressed("move_left"))
 			{

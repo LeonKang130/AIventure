@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Program.fs" />
+        <Compile Include="Characters.fs" />
+        <Compile Include="Conversation.fs" />
+        <Compile Include="Levels.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Godot.SourceGenerators" Version="4.0.0" />
+      <PackageReference Include="GodotSharp" Version="4.0.0" />
+      <PackageReference Include="GodotSharpEditor" Version="4.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Communication\Communication.fsproj" />
+    </ItemGroup>
+
+</Project>

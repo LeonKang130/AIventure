@@ -1,91 +1,28 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using Communication;
+using Util;
 
-public struct CharacterInfo
-{
-	public CharacterInfo(string name, string portraitPath)
-	{
-		this.name = name;
-		this.portrait = ImageTexture.CreateFromImage(Image.LoadFromFile(portraitPath));
-	}
-
-	public string name;
-	public Texture2D portrait;
-}
 
 public partial class wander : Node
 {
-	bool[] PortalUsable = { true, true, true, true };
-	string InteractableCharacterName;
+	public bool[] PortalUsable = { false, true, true, true };
 	Action InteractCallback = () => { };
-	Queue<Tuple<string, string>> FixedDialogQueue = new();
-	Dictionary<string, CharacterInfo> CharacterDictionary = new();
-	private SkipBackend.ChatBotHandler ChatBotHandler = new SkipBackend.ChatBotHandler();
+	private Conversation.ConversationManager ConversationManager;
 	[Signal]
 	public delegate void BackToMainMenuEventHandler();
-
 	[Signal]
 	public delegate void TransitionTriggeredEventHandler();
 	private CanvasLayer Dialog => GetNode<CanvasLayer>("Dialog");
-
-	private Label ListeningLabel =>
-		GetNode<Label>("Dialog/HSplitContainer/TextMargin/ScrollContainer/VBoxContainer/Label");
-
-	private TextEdit SpeakingEdit => GetNode<TextEdit>("Dialog/HSplitContainer/TextMargin/TextEdit");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		CharacterDictionary.Add("slime", new CharacterInfo("Slime", "arts/portrait-slime.png"));
-		CharacterDictionary.Add("harold", new CharacterInfo("Harold", "arts/portrait-harold.png"));
-		FixedDialogQueue.Enqueue(Tuple.Create("Slime", "Damn, I'm gonna be late for the presentation for the boss!"));
-		FixedDialogQueue.Enqueue(Tuple.Create("Slime",
-			"I'm on my first day at this post. I must not get myself fired so soon."));
-		FixedDialogQueue.Enqueue(Tuple.Create("Slime", "Shit! Where should I go?!"));
-		IsPlayingFixedConversation = FixedDialogQueue.Count != 0;
+		ConversationManager = new Conversation.ConversationManager(Dialog);
+		ConversationManager.EnqueuePrioritizedDialog("Slime", "Damn, I'm gonna be late for the presentation for the boss!");
+		ConversationManager.EnqueuePrioritizedDialog("Slime",
+			"I'm on my first day at this post. I must not get myself fired so soon.");
+		ConversationManager.EnqueuePrioritizedDialog("Slime", "Shit! Where should I go?!");
 	}
-
-	private bool IsListening => IsInConversation && ListeningLabel.Visible;
-
-	private bool IsSpeaking =>
-		IsInConversation && SpeakingEdit.Visible;
-
-	private bool IsInConversation => Dialog.Visible;
-	private bool IsWaitingForResponse = false;
-	private bool IsPlayingFixedConversation = false;
 	private bool IsPaused => GetNode<CanvasLayer>("Pause").Visible;
-	
-	void ShowListeningText(string name, string text)
-	{
-		GetNode<TextureRect>("Dialog/HSplitContainer/PortraitMargin/TextureRect").Texture =
-			CharacterDictionary[name.ToLower()].portrait;
-		Dialog.Show();
-		SpeakingEdit.Hide();
-		ListeningLabel.Text =
-			$"{CharacterDictionary[name.ToLower()].name}: {text}";
-		ListeningLabel.Show();
-	}
-
-	private void ShowSpeakingText()
-	{
-		GetNode<TextureRect>("Dialog/HSplitContainer/PortraitMargin/TextureRect").Texture =
-			CharacterDictionary["slime"].portrait;
-		SpeakingEdit.Clear();
-		Dialog.Show();
-		ListeningLabel.Hide();
-		SpeakingEdit.Show();
-	}
-
-	async void FetchDialogReponse(string query)
-	{
-		ShowListeningText(InteractableCharacterName, "...");
-		IsWaitingForResponse = true;
-		var response = await ChatBotHandler.GetAPIResponse(InteractableCharacterName, query);
-		IsWaitingForResponse = false;
-		ShowListeningText(InteractableCharacterName, response);
-		GD.Print(response);
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -95,70 +32,23 @@ public partial class wander : Node
 		{
 			GetNode<CanvasLayer>("Pause").Visible ^= true;
 		}
-
-		if (IsPaused) return;
-		// Play introduction
-		if (!GetNode<CanvasLayer>("CanvasLayer").Visible) return;
-		// Press enter when the player is speaking
-		// Exit conversation if the player says nothing
-		if (IsSpeaking && Input.IsActionJustPressed("continue_dialog"))
+		else if (IsPaused || !GetNode<CanvasLayer>("CanvasLayer").Visible) return;
+		else if (Input.IsActionJustPressed("continue_dialog"))
 		{
-			var query = SpeakingEdit.Text;
-			if (string.IsNullOrEmpty(query))
-			{
-				Dialog.Hide();
-			}
-			else
-			{
-				FetchDialogReponse(query);
-			}
+			ConversationManager.OnContinueDialog();
 		}
-
-		// Enter the process of dialog, and start to talk
-		// NPC: Listening
-		// Player: Talking
-		if (IsListening && !IsWaitingForResponse)
+		else if (Input.IsActionPressed("quit_dialog"))
 		{
-			if (Input.IsActionPressed("quit_dialog"))
-			{
-				if (FixedDialogQueue.Count != 0) FixedDialogQueue.Clear();
-				Dialog.Hide();
-			}
-			else if (Input.IsActionJustPressed("continue_dialog"))
-			{
-				if (IsPlayingFixedConversation)
-				{
-					if (FixedDialogQueue.Count == 0)
-					{
-						IsPlayingFixedConversation = false;
-						Dialog.Hide();
-					}
-					else
-					{
-						var (name, text) = FixedDialogQueue.Dequeue();
-						ShowListeningText(name, text);
-					}
-				}
-				else
-				{
-					ShowSpeakingText();
-				}
-			}
+			ConversationManager.OnQuitDialog();
 		}
-
-		// Interact with NPC
-		if (!IsInConversation && Input.IsActionJustPressed("interact"))
+		else if (Input.IsActionJustPressed("interact") && !ConversationManager.InConversation())
 		{
 			InteractCallback();
 		}
-
-		if (!IsInConversation && FixedDialogQueue.Count != 0)
+		else
 		{
-			IsPlayingFixedConversation = true;
-			var (name, text) = FixedDialogQueue.Dequeue();
-			ShowListeningText(name, text);
+			ConversationManager.PlayPrioritizedDialog();
 		}
-
 		// Shader
 		var material = GetNode<ColorRect>("CanvasLayer/Vignette").Material as ShaderMaterial;
 		material?.SetShaderParameter("player_pos", GetNode<player>("CanvasLayer/Player").Position / 1024);
@@ -176,7 +66,7 @@ public partial class wander : Node
 		GetNode<CanvasLayer>("CanvasLayer").Show();
 	}
 
-	public void OnEnterPortalUp(Node2D _)
+	void OnEnterPortalUp(Node2D _)
 	{
 		var player = GetNode<player>("CanvasLayer/Player");
 		if (PortalUsable[0])
@@ -195,11 +85,14 @@ public partial class wander : Node
 		}
 		else
 		{
-			InteractCallback = () => { FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door.")); };
+			InteractCallback = () =>
+			{
+				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
+			};
 		}
 	}
 
-	public void OnEnterPortalRight(Node2D _)
+	void OnEnterPortalRight(Node2D _)
 	{
 		var player = GetNode<player>("CanvasLayer/Player");
 		if (PortalUsable[1])
@@ -218,11 +111,14 @@ public partial class wander : Node
 		}
 		else
 		{
-			InteractCallback = () => { FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door.")); };
+			InteractCallback = () =>
+			{
+				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
+			};
 		}
 	}
 
-	public void OnEnterPortalDown(Node2D _)
+	void OnEnterPortalDown(Node2D _)
 	{
 		var player = GetNode<player>("CanvasLayer/Player");
 		if (PortalUsable[2])
@@ -241,11 +137,14 @@ public partial class wander : Node
 		}
 		else
 		{
-			InteractCallback = () => { FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door.")); };
+			InteractCallback = () =>
+			{
+				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
+			};
 		}
 	}
 
-	public void OnEnterPortalLeft(Node2D _)
+	void OnEnterPortalLeft(Node2D _)
 	{
 		var player = GetNode<player>("CanvasLayer/Player");
 		if (PortalUsable[3])
@@ -264,38 +163,33 @@ public partial class wander : Node
 		}
 		else
 		{
-			InteractCallback = () => { FixedDialogQueue.Enqueue(Tuple.Create("Slime", "I can't open this door.")); };
+			InteractCallback = () =>
+			{
+				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
+			};
 		}
 	}
 
-	public void OnExitPortal(Node2D _)
+	void OnExitPortal(Node2D _) => InteractCallback = () => { };
+
+	void OnNPCPlayerEnter(string name)
 	{
+		ConversationManager.SetInteractableCharacterName(name);
+		InteractCallback = ConversationManager.ShowTextEdit;
+	}
+
+	void OnNPCPlayerExit(string name)
+	{
+		if (name != ConversationManager.GetInteractableCharacterName()) return;
+		ConversationManager.SetInteractableCharacterName(null);
 		InteractCallback = () => { };
 	}
 
-	public void OnNPCPlayerEnter(string name)
-	{
-		InteractableCharacterName = name;
-		InteractCallback = ShowSpeakingText;
-	}
-
-	public void OnNPCPlayerExit(string name)
-	{
-		if (InteractableCharacterName == name)
-		{
-			InteractableCharacterName = null;
-			InteractCallback = () => { };
-		}
-	}
-
-	public void OnBackToMainMenuButtonPressed()
+	void OnBackToMainMenuButtonPressed()
 	{
 		GetTree().ReloadCurrentScene();
 		EmitSignal(SignalName.BackToMainMenu);
 	}
 
-	public void OnResumeButtonPressed()
-	{
-		GetNode<CanvasLayer>("Pause").Visible ^= true;
-	}
+	void OnResumeButtonPressed() => GetNode<CanvasLayer>("Pause").Visible ^= true;
 }
