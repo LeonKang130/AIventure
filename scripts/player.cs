@@ -8,10 +8,10 @@ public partial class player : RigidBody2D
 	private bool IsPaused => Pause is { Visible: true };
 	public enum FacingDirection
 	{
-		Left,
-		Right,
-		Up,
-		Down
+		Up = 0,
+		Right = 1,
+		Down = 2,
+		Left = 3
 	}
 	[Export] public float Speed;
 	[Export] public FacingDirection Direction;

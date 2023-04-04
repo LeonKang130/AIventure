@@ -1,18 +1,37 @@
-using Godot;
 using System;
+using Godot;
+using System.Collections.Generic;
+using System.Linq;
 using Util;
-
 
 public partial class wander : Node
 {
-	public bool[] PortalUsable = { false, true, true, true };
-	Action InteractCallback = () => { };
+	private enum InteractionType
+	{
+		UsePortalUp = 0,
+		UsePortalRight = 1,
+		UsePortalDown = 2,
+		UsePortalLeft = 3,
+		// Don't touch the first four
+		NPCConversation,
+		None,
+	}
+	private InteractionType _interaction = InteractionType.None;
 	private Conversation.ConversationManager ConversationManager;
+	private Levels.LevelHandler LevelHandler;
+	private bool[] PortalUsability => LevelHandler.PortalUsability;
+	private Vector2I CurrentLocation => LevelHandler.CurrentLocation;
+	private Vector2I Destination => LevelHandler.Destination;
+	private bool IsPaused => GetNode<CanvasLayer>("Pause").Visible;
+	private CanvasLayer Dialog => GetNode<CanvasLayer>("Dialog");
+	private Marker2D[] SpawnMarkers =>
+		new List<string> { "SpawnLocationDown", "SpawnLocationLeft", "SpawnLocationUp", "SpawnLocationRight" }
+			.Select(markerName => GetNode<Marker2D>("PlayerSpawnLocations/" + markerName))
+			.ToArray();
 	[Signal]
 	public delegate void BackToMainMenuEventHandler();
 	[Signal]
 	public delegate void TransitionTriggeredEventHandler();
-	private CanvasLayer Dialog => GetNode<CanvasLayer>("Dialog");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -21,8 +40,11 @@ public partial class wander : Node
 		ConversationManager.EnqueuePrioritizedDialog("Slime",
 			"I'm on my first day at this post. I must not get myself fired so soon.");
 		ConversationManager.EnqueuePrioritizedDialog("Slime", "Shit! Where should I go?!");
+		LevelHandler = new Levels.LevelHandler();
+		GD.Print($"Slime Spawned At: {CurrentLocation}");
+		GD.Print($"Destination At: {Destination}");
 	}
-	private bool IsPaused => GetNode<CanvasLayer>("Pause").Visible;
+	
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -43,7 +65,27 @@ public partial class wander : Node
 		}
 		else if (Input.IsActionJustPressed("interact") && !ConversationManager.InConversation())
 		{
-			InteractCallback();
+			switch (_interaction)
+			{
+				case InteractionType.NPCConversation:
+				{
+					ConversationManager.ShowTextEdit();
+					break;
+				}
+				case InteractionType.UsePortalUp or InteractionType.UsePortalRight or InteractionType.UsePortalDown or InteractionType.UsePortalLeft:
+				{
+					var portalIndex = (int)_interaction;
+					if (PortalUsability[portalIndex])
+					{
+						MoveToLevel(portalIndex);
+					}
+					else
+					{
+						ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door!");
+					}
+					break;
+				}
+			}
 		}
 		else
 		{
@@ -66,123 +108,76 @@ public partial class wander : Node
 		GetNode<CanvasLayer>("CanvasLayer").Show();
 	}
 
-	void OnEnterPortalUp(Node2D _)
+	private void SetUpLevel()
 	{
-		var player = GetNode<player>("CanvasLayer/Player");
-		if (PortalUsable[0])
+		// Reload lamps and Set NPC
+		var npc = GetNode<npc>("CanvasLayer/NPC");
+		if (LevelHandler.CurrentLevel.IsNPC)
 		{
-			InteractCallback = () =>
-			{
-				EmitSignal(SignalName.TransitionTriggered);
-				player.NextTransform = player.Transform;
-				player.NextTransform = player.NextTransform.Translated(
-					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationDown").Position -
-					player.Position);
-				player.Direction = player.FacingDirection.Up;
-				player.ResetState = true;
-				InteractCallback = () => { };
-			};
+			npc.Show();
 		}
 		else
 		{
-			InteractCallback = () =>
-			{
-				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
-			};
+			npc.Hide();
 		}
+	}
+
+	private void MoveToLevel(int portalIndex)
+	{
+		EmitSignal(SignalName.TransitionTriggered);
+		var spawnLocation = SpawnMarkers[portalIndex].Position;
+		var player = GetNode<player>("CanvasLayer/Player");
+		player.NextTransform = player.Transform;
+		player.NextTransform = player.NextTransform.Translated(spawnLocation - player.Position);
+		player.Direction = (player.FacingDirection)portalIndex;
+		player.ResetState = true;
+		var offset =
+			(portalIndex & 2) == 0
+				? (portalIndex & 1) == 0 ? Vector2I.Up : Vector2I.Right
+				: (portalIndex & 1) == 0 ? Vector2I.Down : Vector2I.Left;
+		var NextLocation = CurrentLocation + offset;
+		GD.Print($"Moving: {CurrentLocation} => {NextLocation}");
+		LevelHandler.SetLocation(NextLocation);
+		SetUpLevel();
+	}
+	void OnEnterPortalUp(Node2D _)
+	{
+		_interaction = InteractionType.UsePortalUp;
 	}
 
 	void OnEnterPortalRight(Node2D _)
 	{
-		var player = GetNode<player>("CanvasLayer/Player");
-		if (PortalUsable[1])
-		{
-			InteractCallback = () =>
-			{
-				EmitSignal(SignalName.TransitionTriggered);
-				player.NextTransform = player.Transform;
-				player.NextTransform = player.NextTransform.Translated(
-					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationLeft").Position -
-					player.Position);
-				player.Direction = player.FacingDirection.Right;
-				player.ResetState = true;
-				InteractCallback = () => { };
-			};
-		}
-		else
-		{
-			InteractCallback = () =>
-			{
-				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
-			};
-		}
+		_interaction = InteractionType.UsePortalRight;
 	}
 
 	void OnEnterPortalDown(Node2D _)
 	{
-		var player = GetNode<player>("CanvasLayer/Player");
-		if (PortalUsable[2])
-		{
-			InteractCallback = () =>
-			{
-				EmitSignal(SignalName.TransitionTriggered);
-				player.NextTransform = player.Transform;
-				player.NextTransform = player.NextTransform.Translated(
-					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationUp").Position -
-					player.Position);
-				player.Direction = player.FacingDirection.Down;
-				player.ResetState = true;
-				InteractCallback = () => { };
-			};
-		}
-		else
-		{
-			InteractCallback = () =>
-			{
-				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
-			};
-		}
+		_interaction = InteractionType.UsePortalDown;
 	}
 
 	void OnEnterPortalLeft(Node2D _)
 	{
-		var player = GetNode<player>("CanvasLayer/Player");
-		if (PortalUsable[3])
-		{
-			InteractCallback = () =>
-			{
-				EmitSignal(SignalName.TransitionTriggered);
-				player.NextTransform = player.Transform;
-				player.NextTransform = player.NextTransform.Translated(
-					GetNode<Marker2D>("PlayerSpawnLocations/SpawnLocationRight").Position -
-					player.Position);
-				player.Direction = player.FacingDirection.Left;
-				player.ResetState = true;
-				InteractCallback = () => { };
-			};
-		}
-		else
-		{
-			InteractCallback = () =>
-			{
-				ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door.");
-			};
-		}
+		_interaction = InteractionType.UsePortalLeft;
 	}
 
-	void OnExitPortal(Node2D _) => InteractCallback = () => { };
+	void OnExitPortal(Node2D _)
+	{
+		if ((int)_interaction > 3) return;
+		_interaction = InteractionType.None;
+	}
 
 	void OnNPCPlayerEnter(string name)
 	{
 		ConversationManager.SetInteractableCharacterName(name);
-		InteractCallback = ConversationManager.ShowTextEdit;
+		_interaction = InteractionType.NPCConversation;
 	}
 
 	void OnNPCPlayerExit(string name)
 	{
 		if (name != ConversationManager.GetInteractableCharacterName()) return;
 		ConversationManager.SetInteractableCharacterName(null);
-		InteractCallback = () => { };
+		if (_interaction != InteractionType.NPCConversation) return;
+		_interaction = InteractionType.None;
 	}
 
 	void OnBackToMainMenuButtonPressed()

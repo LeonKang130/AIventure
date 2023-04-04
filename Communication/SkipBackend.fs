@@ -24,7 +24,7 @@ type ChatBotHandler() =
             ChatPrompt("user", "Is it safe around here?")
             ChatPrompt("assistant", "It's none of my business.")
         ]
-    let API = "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" |> OpenAIClient
+    let API = "[<YOUR KEY HERE>]" |> OpenAIClient
     member this.ConversationSettings =
         if Directory.Exists "characters" then
             Directory.EnumerateDirectories "characters"
