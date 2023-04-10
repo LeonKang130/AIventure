@@ -2,7 +2,7 @@ import openai
 import time
 start_time = time.time()
 #目前只能回复一句话，但效果最好，后期需要想办法将ai回复和用户敲击键盘作为输入append到message中再与api交互
-openai.api_key = "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"
+openai.api_key = "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"
 
 response=openai.ChatCompletion.create(
     model="gpt-3.5-turbo",

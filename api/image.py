@@ -1,7 +1,7 @@
 import openai
 import time
 start_time = time.time()
-openai.api_key = "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"
+openai.api_key = "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"
 
 #translation
 chinese_text='很多蝴蝶在粉色的花丛中飞舞'#接受用户输入的中文字符串
