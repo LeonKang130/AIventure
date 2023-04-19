@@ -22,7 +22,7 @@ messages = json.loads(json.loads(input))#获取到前端的messages
 #     ]
 # start_time = time.time()
 #目前只能回复一句话，但效果最好，后期需要想办法将ai回复和用户敲击键盘作为输入append到message中再与api交互
-openai.api_key = "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"
+openai.api_key = "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"
 
 response=openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
