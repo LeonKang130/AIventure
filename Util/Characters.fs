@@ -2,10 +2,10 @@
 open System.IO
 open Godot
 
-type CharacterManager() =
+type CharacterManager(directory: string) =
     member this.CharacterList =
-        if Directory.Exists "characters" then
-            Directory.EnumerateDirectories "characters"
+        if Directory.Exists directory then
+            Directory.EnumerateDirectories directory
             |> Seq.map (fun path ->
                 Path.DirectorySeparatorChar.ToString()
                 |> path.Split
@@ -20,7 +20,7 @@ type CharacterManager() =
         |> Seq.ofList
         |> Seq.map (fun name ->
             let portrait =
-                [| "characters"; name; $"{name.ToLower()}.png" |]
+                [| directory; name; $"{name.ToLower()}.png" |]
                 |> Path.Join
                 |> Image.LoadFromFile
                 |> ImageTexture.CreateFromImage

@@ -11,6 +11,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Godot.SourceGenerators" Version="4.0.0" />
+      <PackageReference Include="GodotSharp" Version="4.0.0" />
+      <PackageReference Include="GodotSharpEditor" Version="4.0.0" />
       <PackageReference Include="OpenAI-DotNet" Version="6.5.0" />
     </ItemGroup>
 

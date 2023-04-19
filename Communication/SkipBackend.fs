@@ -3,11 +3,13 @@ open System
 open System.Collections.Generic
 open System.IO
 open FSharp.Core
+open Godot
 open Microsoft.FSharp.Collections
 open OpenAI
 open OpenAI.Chat
 
-type ChatBotHandler() =
+type ChatBotHandler(directory: string) =
+    do GD.Print directory
     let MAX_MEMORY_LENGTH = 20
     let DefaultSetting =
             ChatPrompt(
@@ -24,10 +26,10 @@ type ChatBotHandler() =
             ChatPrompt("user", "Is it safe around here?")
             ChatPrompt("assistant", "It's none of my business.")
         ]
-    let API = "[<YOUR KEY HERE>]" |> OpenAIClient
+    let API = "your key here" |> OpenAIClient
     member this.ConversationSettings =
-        if Directory.Exists "characters" then
-            Directory.EnumerateDirectories "characters"
+        if Directory.Exists directory then
+            Directory.EnumerateDirectories directory
             |> Seq.map (fun path ->
                 let name =
                     Path.DirectorySeparatorChar.ToString()
@@ -46,14 +48,15 @@ type ChatBotHandler() =
             failwith "Character settings not found"
             Map.empty<string, ChatPrompt>
      member this.ConversationCache =
-        if Directory.Exists "characters" then
-            Directory.EnumerateDirectories "characters"
+        if Directory.Exists directory then
+            Directory.EnumerateDirectories directory
             |> Seq.map (fun path ->
                 let name =
                     Path.DirectorySeparatorChar.ToString()
                     |> path.Split 
                     |> Array.last
                     |> fun x -> x.Trim().ToLower()
+                GD.Print name
                 let examples =
                     [|path; "examples.txt"|]
                     |> Path.Join

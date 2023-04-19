@@ -56,6 +56,41 @@
           }
         }
       },
+      "Godot.SourceGenerators/4.0.0": {
+        "type": "package",
+        "build": {
+          "build/Godot.SourceGenerators.props": {}
+        }
+      },
+      "GodotSharp/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/GodotSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/GodotSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "GodotSharpEditor/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "GodotSharp": "4.0.0"
+        },
+        "compile": {
+          "lib/net6.0/GodotSharpEditor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/GodotSharpEditor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "OpenAI-DotNet/6.5.0": {
         "type": "package",
         "compile": {
@@ -110,6 +145,42 @@
         "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll"
       ]
     },
+    "Godot.SourceGenerators/4.0.0": {
+      "sha512": "u+xcapvfVha2BtTF7cRHrNfo+mxH4uGsJrEDQFM3FG+Kww61m2Qs/s2IqgEzR/CLFwidrdgn624xFHk738KnQw==",
+      "type": "package",
+      "path": "godot.sourcegenerators/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "analyzers/dotnet/cs/Godot.SourceGenerators.dll",
+        "build/Godot.SourceGenerators.props",
+        "godot.sourcegenerators.4.0.0.nupkg.sha512",
+        "godot.sourcegenerators.nuspec"
+      ]
+    },
+    "GodotSharp/4.0.0": {
+      "sha512": "SbiM07Eh6m1vASfzSIMIfwdpFvI6E+c0+VA5aOB3SKl/pWnl8ToAc8eR1wbjBnkw7D13A8+Nk8j/AJvWiHOCTw==",
+      "type": "package",
+      "path": "godotsharp/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "godotsharp.4.0.0.nupkg.sha512",
+        "godotsharp.nuspec",
+        "lib/net6.0/GodotSharp.dll",
+        "lib/net6.0/GodotSharp.xml"
+      ]
+    },
+    "GodotSharpEditor/4.0.0": {
+      "sha512": "VmNKvHgFdK67l/e8BfUqzVSXS3wZqZhYREdh1VKzZCY61vKxXqppIUcUb8QzsS0RaK00jXVK4LqlcxrgpG9sUQ==",
+      "type": "package",
+      "path": "godotsharpeditor/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "godotsharpeditor.4.0.0.nupkg.sha512",
+        "godotsharpeditor.nuspec",
+        "lib/net6.0/GodotSharpEditor.dll",
+        "lib/net6.0/GodotSharpEditor.xml"
+      ]
+    },
     "OpenAI-DotNet/6.5.0": {
       "sha512": "qiJSDegKoUAYNXCBhIQfEzwtVChyIei5d83Z7eTyIJHm1zW7WBcWxa1AfzTqbORPLjwH6i17/wbffns0M0TzfA==",
       "type": "package",
@@ -128,6 +199,9 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "FSharp.Core >= 7.0.0",
+      "Godot.SourceGenerators >= 4.0.0",
+      "GodotSharp >= 4.0.0",
+      "GodotSharpEditor >= 4.0.0",
       "OpenAI-DotNet >= 6.5.0"
     ]
   },
@@ -179,6 +253,21 @@
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
             "version": "[7.0.0, )",
+            "generatePathProperty": true
+          },
+          "Godot.SourceGenerators": {
+            "target": "Package",
+            "version": "[4.0.0, )",
+            "generatePathProperty": true
+          },
+          "GodotSharp": {
+            "target": "Package",
+            "version": "[4.0.0, )",
+            "generatePathProperty": true
+          },
+          "GodotSharpEditor": {
+            "target": "Package",
+            "version": "[4.0.0, )",
             "generatePathProperty": true
           },
           "OpenAI-DotNet": {

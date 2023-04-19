@@ -105,6 +105,9 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "FSharp.Core": "7.0.0",
+          "Godot.SourceGenerators": "4.0.0",
+          "GodotSharp": "4.0.0",
+          "GodotSharpEditor": "4.0.0",
           "OpenAI-DotNet": "6.5.0"
         },
         "compile": {

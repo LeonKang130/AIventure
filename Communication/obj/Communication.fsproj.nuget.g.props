@@ -14,8 +14,14 @@
     <SourceRoot Include="C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(UserProfile)\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0\build\Godot.SourceGenerators.props" Condition="Exists('$(UserProfile)\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0\build\Godot.SourceGenerators.props')" />
+  </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgOpenAI-DotNet Condition=" '$(PkgOpenAI-DotNet)' == '' ">C:\Users\kang\.nuget\packages\openai-dotnet\6.5.0</PkgOpenAI-DotNet>
+    <PkgGodotSharp Condition=" '$(PkgGodotSharp)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godotsharp\4.0.0</PkgGodotSharp>
+    <PkgGodotSharpEditor Condition=" '$(PkgGodotSharpEditor)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godotsharpeditor\4.0.0</PkgGodotSharpEditor>
+    <PkgGodot_SourceGenerators Condition=" '$(PkgGodot_SourceGenerators)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0</PkgGodot_SourceGenerators>
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\kang\.nuget\packages\fsharp.core\7.0.0</PkgFSharp_Core>
   </PropertyGroup>
 </Project>

@@ -10,7 +10,7 @@ type ConversationState =
     | NPCWaiting
     | Inactive
 
-type ConversationManager(dialog: CanvasLayer) =
+type ConversationManager(dialog: CanvasLayer, directory: string) =
     let mutable name: string option = None
     let mutable prioritized: (string * string) list = []
     let mutable current = ConversationState.Inactive
@@ -18,8 +18,8 @@ type ConversationManager(dialog: CanvasLayer) =
     let portrait = dialog.GetNode<TextureRect>("HSplitContainer/PortraitMargin/TextureRect")
     let label = dialog.GetNode<Label>("HSplitContainer/TextMargin/ScrollContainer/VBoxContainer/Label")
     let textEdit = dialog.GetNode<TextEdit>("HSplitContainer/TextMargin/TextEdit")
-    let chatBotHandler = ChatBotHandler()
-    let characterManager = CharacterManager()
+    let chatBotHandler = ChatBotHandler(directory)
+    let characterManager = CharacterManager(directory)
     member this.InConversation() =
         dialog.Visible
     member this.ShowMessage (character: string) (message: string) =

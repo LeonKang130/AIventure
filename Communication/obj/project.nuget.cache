@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "KJE9L+ut5Any8NuHMllBCf2Byf4T7wUsZ64/WlnMd8dWvkQYhfTumtuXZra3FuEHawSIyTmOvETG+NA5DZFjuA==",
+  "dgSpecHash": "S6BQSEvxR+D6Z547NHSx2X0XJM7DreSEff7ZSo7PudwtgfdQDSK+dTUITSjToXQ2YNJK/DTQqQeA3NX3kUOpXw==",
   "success": true,
   "projectFilePath": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj",
   "expectedPackageFiles": [
     "C:\\Users\\kang\\.nuget\\packages\\fsharp.core\\7.0.0\\fsharp.core.7.0.0.nupkg.sha512",
+    "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0\\godot.sourcegenerators.4.0.0.nupkg.sha512",
+    "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0\\godotsharp.4.0.0.nupkg.sha512",
+    "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharpeditor\\4.0.0\\godotsharpeditor.4.0.0.nupkg.sha512",
     "C:\\Users\\kang\\.nuget\\packages\\openai-dotnet\\6.5.0\\openai-dotnet.6.5.0.nupkg.sha512"
   ],
   "logs": []

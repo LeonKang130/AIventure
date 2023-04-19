@@ -49,6 +49,21 @@
               "version": "[7.0.0, )",
               "generatePathProperty": true
             },
+            "Godot.SourceGenerators": {
+              "target": "Package",
+              "version": "[4.0.0, )",
+              "generatePathProperty": true
+            },
+            "GodotSharp": {
+              "target": "Package",
+              "version": "[4.0.0, )",
+              "generatePathProperty": true
+            },
+            "GodotSharpEditor": {
+              "target": "Package",
+              "version": "[4.0.0, )",
+              "generatePathProperty": true
+            },
             "OpenAI-DotNet": {
               "target": "Package",
               "version": "[6.5.0, )",
