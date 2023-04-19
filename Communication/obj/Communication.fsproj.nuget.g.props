@@ -23,5 +23,6 @@
     <PkgGodotSharpEditor Condition=" '$(PkgGodotSharpEditor)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godotsharpeditor\4.0.0</PkgGodotSharpEditor>
     <PkgGodot_SourceGenerators Condition=" '$(PkgGodot_SourceGenerators)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0</PkgGodot_SourceGenerators>
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\kang\.nuget\packages\fsharp.core\7.0.0</PkgFSharp_Core>
+    <PkgFSharp_Json_New Condition=" '$(PkgFSharp_Json_New)' == '' ">C:\Users\kang\.nuget\packages\fsharp.json.new\0.4.2</PkgFSharp_Json_New>
   </PropertyGroup>
 </Project>

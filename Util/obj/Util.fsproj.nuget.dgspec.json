@@ -49,6 +49,11 @@
               "version": "[7.0.0, )",
               "generatePathProperty": true
             },
+            "FSharp.Json.New": {
+              "target": "Package",
+              "version": "[0.4.2, )",
+              "generatePathProperty": true
+            },
             "Godot.SourceGenerators": {
               "target": "Package",
               "version": "[4.0.0, )",

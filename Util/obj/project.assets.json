@@ -56,6 +56,18 @@
           }
         }
       },
+      "FSharp.Json.New/0.4.2": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "6.0.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/FSharp.Json.New.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.Json.New.dll": {}
+        }
+      },
       "Godot.SourceGenerators/4.0.0": {
         "type": "package",
         "build": {
@@ -105,6 +117,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "FSharp.Core": "7.0.0",
+          "FSharp.Json.New": "0.4.2",
           "Godot.SourceGenerators": "4.0.0",
           "GodotSharp": "4.0.0",
           "GodotSharpEditor": "4.0.0",
@@ -160,6 +173,19 @@
         "lib/netstandard2.1/tr/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll"
+      ]
+    },
+    "FSharp.Json.New/0.4.2": {
+      "sha512": "KE1hh4oCyGGYiwPDYP6xKu3pXkk6hXkJFy7tq/6AbL23QdXidhpHfGbL0hc26IvuiCuyPKJ23vTlpIz9kQTyCA==",
+      "type": "package",
+      "path": "fsharp.json.new/0.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "fsharp.json.new.0.4.2.nupkg.sha512",
+        "fsharp.json.new.nuspec",
+        "lib/netstandard2.0/FSharp.Json.New.dll"
       ]
     },
     "Godot.SourceGenerators/4.0.0": {

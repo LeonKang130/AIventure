@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "j++LQms2bP43ln4TC2CAz7wo1gEHXD4JRPmKEUcX3EfqaPHjhNi23AEVXNlcpheUPbYXkw/+PrihZ1Zt3iVP8Q==",
+  "dgSpecHash": "S8/hHJcURQzEziGK6G2fR/4vXHyn8MLN2kmX4nMlUjzR9QD5XbozTy5z6QBumdOqYFLNcJ3udhXl3h0i92V6hw==",
   "success": true,
   "projectFilePath": "C:\\Users\\kang\\Desktop\\AIventure\\Util\\Util.fsproj",
   "expectedPackageFiles": [
     "C:\\Users\\kang\\.nuget\\packages\\fsharp.core\\7.0.0\\fsharp.core.7.0.0.nupkg.sha512",
+    "C:\\Users\\kang\\.nuget\\packages\\fsharp.json.new\\0.4.2\\fsharp.json.new.0.4.2.nupkg.sha512",
     "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0\\godot.sourcegenerators.4.0.0.nupkg.sha512",
     "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0\\godotsharp.4.0.0.nupkg.sha512",
     "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharpeditor\\4.0.0\\godotsharpeditor.4.0.0.nupkg.sha512",

@@ -1,13 +1,16 @@
-﻿module Communication.SkipBackend
+﻿module Communication.ThroughBackend
 open System
-open System.Collections.Generic
 open System.IO
+open System.Collections.Generic
 open FSharp.Core
-open Godot
 open Microsoft.FSharp.Collections
-open OpenAI
-open OpenAI.Chat
-
+open FSharp.Json
+open Godot
+type Prompt = {
+    role: string
+    content: string
+}
+let ChatPrompt (role, content) = { role = role; content = content }
 type ChatBotHandler(directory: string) =
     let MAX_MEMORY_LENGTH = 20
     let DefaultSetting =
@@ -25,7 +28,6 @@ type ChatBotHandler(directory: string) =
             ChatPrompt("user", "Is it safe around here?")
             ChatPrompt("assistant", "It's none of my business.")
         ]
-    let API = "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" |> OpenAIClient
     member this.ConversationSettings =
         if Directory.Exists directory then
             Directory.EnumerateDirectories directory
@@ -45,7 +47,7 @@ type ChatBotHandler(directory: string) =
             |> Map.ofSeq
         else
             failwith "Character settings not found"
-            Map.empty<string, ChatPrompt>
+            Map.empty<string, Prompt>
     member this.ConversationCache =
         if Directory.Exists directory then
             Directory.EnumerateDirectories directory
@@ -55,7 +57,6 @@ type ChatBotHandler(directory: string) =
                     |> path.Split 
                     |> Array.last
                     |> fun x -> x.Trim().ToLower()
-                GD.Print name
                 let examples =
                     [|path; "examples.txt"|]
                     |> Path.Join
@@ -72,30 +73,17 @@ type ChatBotHandler(directory: string) =
                     |> List.ofSeq
                 KeyValuePair(name, examples)
             )
-            |> Dictionary<string, ChatPrompt list>
+            |> Dictionary<string, Prompt list>
         else
-            Dictionary<string, ChatPrompt list>()
+            Dictionary<string, Prompt list>()
     member this.GetAPIResponse (character: string) (query: string) =
         task {
             let key = character.ToLower()
             let setting = this.ConversationSettings.GetValueOrDefault (key, DefaultSetting)
             let cache = this.ConversationCache.GetValueOrDefault (key, DefaultCache)
             let queryPrompt = ChatPrompt("user", query)
-            let! result =
-                setting :: cache @ [queryPrompt]
-                |> ChatRequest
-                |> API.ChatEndpoint.GetCompletionAsync
-                |> Async.AwaitTask
-                |> Async.Catch // Catch exception due to network error
-            match result with
-            | Choice1Of2 chatResponse ->
-                let response = chatResponse.FirstChoice.Message.Content
-                let cache =
-                    cache @ [queryPrompt; ChatPrompt("assistant", response)]
-                    |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
-                this.ConversationCache[key] <- cache
-                return response
-            | Choice2Of2 _ ->
-                return "(unrecognized mumbling...)"
+            setting :: cache @ [queryPrompt]
+            |> Json.serialize
+            |> GD.Print
+            return "(unrecognized mumbling...)"
         }
-    
