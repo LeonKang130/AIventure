@@ -5,6 +5,7 @@ open System.Collections.Generic
 open FSharp.Core
 open Microsoft.FSharp.Collections
 open FSharp.Json
+open FSharp.Data
 open Godot
 type Prompt = {
     role: string
@@ -82,8 +83,17 @@ type ChatBotHandler(directory: string) =
             let setting = this.ConversationSettings.GetValueOrDefault (key, DefaultSetting)
             let cache = this.ConversationCache.GetValueOrDefault (key, DefaultCache)
             let queryPrompt = ChatPrompt("user", query)
-            setting :: cache @ [queryPrompt]
-            |> Json.serialize
-            |> GD.Print
+            let prompts =
+                setting :: cache @ [queryPrompt]
+                |> Json.serialize
+            let! result = Http.AsyncRequest(
+                "http://183.172.163.109:3000/chat",
+                httpMethod = "POST",
+                body = HttpRequestBody.FormValues(
+                    [("messages", prompts)]
+                    |> Seq.ofList
+                )
+            )
+            GD.Print result
             return "(unrecognized mumbling...)"
         }

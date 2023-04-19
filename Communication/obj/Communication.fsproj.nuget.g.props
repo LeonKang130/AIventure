@@ -4,24 +4,26 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/xcj/.nuget/packages/</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/xcj/.nuget/packages/;/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\kang\.nuget\packages\;C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.3.2</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.4.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="/Users/xcj/.nuget/packages/" />
-    <SourceRoot Include="/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder/" />
+    <SourceRoot Include="C:\Users\kang\.nuget\packages\" />
+    <SourceRoot Include="C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\" />
+    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder/godot.sourcegenerators/4.0.0/build/Godot.SourceGenerators.props" Condition="Exists('/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder/godot.sourcegenerators/4.0.0/build/Godot.SourceGenerators.props')" />
+    <Import Project="$(UserProfile)\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0\build\Godot.SourceGenerators.props" Condition="Exists('$(UserProfile)\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0\build\Godot.SourceGenerators.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgOpenAI-DotNet Condition=" '$(PkgOpenAI-DotNet)' == '' ">/Users/xcj/.nuget/packages/openai-dotnet/6.5.0</PkgOpenAI-DotNet>
-    <PkgGodotSharp Condition=" '$(PkgGodotSharp)' == '' ">/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder/godotsharp/4.0.0</PkgGodotSharp>
-    <PkgGodotSharpEditor Condition=" '$(PkgGodotSharpEditor)' == '' ">/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder/godotsharpeditor/4.0.0</PkgGodotSharpEditor>
-    <PkgGodot_SourceGenerators Condition=" '$(PkgGodot_SourceGenerators)' == '' ">/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder/godot.sourcegenerators/4.0.0</PkgGodot_SourceGenerators>
-    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/Users/xcj/.nuget/packages/fsharp.core/6.0.7</PkgFSharp_Core>
-    <PkgFSharp_Json_New Condition=" '$(PkgFSharp_Json_New)' == '' ">/Users/xcj/.nuget/packages/fsharp.json.new/0.4.2</PkgFSharp_Json_New>
+    <PkgOpenAI-DotNet Condition=" '$(PkgOpenAI-DotNet)' == '' ">C:\Users\kang\.nuget\packages\openai-dotnet\6.5.0</PkgOpenAI-DotNet>
+    <PkgGodotSharp Condition=" '$(PkgGodotSharp)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godotsharp\4.0.0</PkgGodotSharp>
+    <PkgGodotSharpEditor Condition=" '$(PkgGodotSharpEditor)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godotsharpeditor\4.0.0</PkgGodotSharpEditor>
+    <PkgGodot_SourceGenerators Condition=" '$(PkgGodot_SourceGenerators)' == '' ">C:\Users\kang\AppData\Roaming\Godot\mono\GodotNuGetFallbackFolder\godot.sourcegenerators\4.0.0</PkgGodot_SourceGenerators>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\kang\.nuget\packages\fsharp.core\7.0.0</PkgFSharp_Core>
+    <PkgFSharp_Json_New Condition=" '$(PkgFSharp_Json_New)' == '' ">C:\Users\kang\.nuget\packages\fsharp.json.new\0.4.2</PkgFSharp_Json_New>
+    <PkgFSharp_Data Condition=" '$(PkgFSharp_Data)' == '' ">C:\Users\kang\.nuget\packages\fsharp.data\5.0.2</PkgFSharp_Data>
   </PropertyGroup>
 </Project>

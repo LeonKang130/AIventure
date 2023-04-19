@@ -1,12 +1,3 @@
-C:/Users/kang/Desktop/AIventure/Communication/bin/Debug/net6.0/Communication.deps.json
-C:/Users/kang/Desktop/AIventure/Communication/bin/Debug/net6.0/Communication.dll
-C:/Users/kang/Desktop/AIventure/Communication/bin/Debug/net6.0/Communication.pdb
-C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.fsproj.AssemblyReference.cache
-C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.AssemblyInfoInputs.cache
-C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.AssemblyInfo.fs
-C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.fsproj.CoreCompileInputs.cache
-C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.dll
-C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.pdb
 /Users/xcj/AIventure/Communication/bin/Debug/net6.0/Communication.deps.json
 /Users/xcj/AIventure/Communication/bin/Debug/net6.0/Communication.dll
 /Users/xcj/AIventure/Communication/bin/Debug/net6.0/Communication.pdb
@@ -16,3 +7,12 @@ C:/Users/kang/Desktop/AIventure/Communication/obj/Debug/net6.0/Communication.pdb
 /Users/xcj/AIventure/Communication/obj/Debug/net6.0/Communication.fsproj.CoreCompileInputs.cache
 /Users/xcj/AIventure/Communication/obj/Debug/net6.0/Communication.dll
 /Users/xcj/AIventure/Communication/obj/Debug/net6.0/Communication.pdb
+C:\Users\kang\Desktop\AIventure\Communication\bin\Debug\net6.0\Communication.deps.json
+C:\Users\kang\Desktop\AIventure\Communication\bin\Debug\net6.0\Communication.dll
+C:\Users\kang\Desktop\AIventure\Communication\bin\Debug\net6.0\Communication.pdb
+C:\Users\kang\Desktop\AIventure\Communication\obj\Debug\net6.0\Communication.fsproj.AssemblyReference.cache
+C:\Users\kang\Desktop\AIventure\Communication\obj\Debug\net6.0\Communication.AssemblyInfoInputs.cache
+C:\Users\kang\Desktop\AIventure\Communication\obj\Debug\net6.0\Communication.AssemblyInfo.fs
+C:\Users\kang\Desktop\AIventure\Communication\obj\Debug\net6.0\Communication.fsproj.CoreCompileInputs.cache
+C:\Users\kang\Desktop\AIventure\Communication\obj\Debug\net6.0\Communication.dll
+C:\Users\kang\Desktop\AIventure\Communication\obj\Debug\net6.0\Communication.pdb
