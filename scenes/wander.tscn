@@ -130,10 +130,8 @@ collision_mask = 2
 position = Vector2(512, 960)
 shape = SubResource("RectangleShape2D_h3v2j")
 
-[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog", "Pause") instance=ExtResource("5_broxm")]
+[node name="Player" parent="CanvasLayer" instance=ExtResource("5_broxm")]
 position = Vector2(512, 512)
-Dialog = NodePath("../../Dialog")
-Pause = NodePath("../../Pause")
 Speed = 512.0
 Direction = 3
 
@@ -180,7 +178,7 @@ color = Color(0, 0, 0, 0.776471)
 
 [node name="NPC" parent="CanvasLayer" instance=ExtResource("8_hcmi8")]
 position = Vector2(384, 384)
-CharacterName = "Slime"
+CharacterName = "Harold"
 
 [node name="Bound" parent="." instance=ExtResource("6_4bo40")]
 
@@ -323,7 +321,5 @@ text = "Resume"
 [connection signal="body_exited" from="CanvasLayer/PortalUp" to="." method="OnExitPortal"]
 [connection signal="body_entered" from="CanvasLayer/PortalDown" to="." method="OnEnterPortalDown"]
 [connection signal="body_exited" from="CanvasLayer/PortalDown" to="." method="OnExitPortal"]
-[connection signal="PlayerEnter" from="CanvasLayer/NPC" to="." method="OnNPCPlayerEnter"]
-[connection signal="PlayerExit" from="CanvasLayer/NPC" to="." method="OnNPCPlayerExit"]
 [connection signal="pressed" from="Pause/ColorRect/QuitButton" to="." method="OnBackToMainMenuButtonPressed"]
 [connection signal="pressed" from="Pause/ColorRect/ResumeButton" to="." method="OnResumeButtonPressed"]

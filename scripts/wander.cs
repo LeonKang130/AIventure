@@ -75,10 +75,12 @@ public partial class wander : Node
         }
         else if (Input.IsActionJustPressed("interact") && !ConversationManager.InConversation())
         {
+            GD.Print("Interact started");
             switch (_interaction)
             {
                 case InteractionType.NPCConversation:
                 {
+                        GD.Print("Should show textedit");
                     ConversationManager.ShowTextEdit();
                     break;
                 }
@@ -127,6 +129,7 @@ public partial class wander : Node
         var npc = GetNode<npc>("CanvasLayer/NPC");
         if (LevelHandler.CurrentLevel.IsNPC)
         {
+            npc.CharacterName = LevelHandler.CurrentLevelNPCName;
             npc.Show();
         }
         else
