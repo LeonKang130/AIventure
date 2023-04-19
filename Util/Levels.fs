@@ -29,6 +29,7 @@ type LevelHandler() =
            [| for _ in 0 .. MapWidth - 1 -> [| for _ in 0 .. MapHeight - 1 -> Level.Empty |] |]
         // map initialization here
         grid[spawn.X][spawn.Y] <- Level.NPC("Harold")
+        grid[destination.X][destination.Y] <- Level.NPC("Devil")
         grid
     let mutable visited =
         let mutable visited =
