@@ -26,6 +26,7 @@ public partial class wander : Node
     private Vector2I Destination => LevelHandler.Destination;
     private bool IsPaused => GetNode<CanvasLayer>("Pause").Visible;
     private CanvasLayer Dialog => GetNode<CanvasLayer>("Dialog");
+    private bool ExitRequested = false;
 
     private Marker2D[] SpawnMarkers =>
         new List<string> { "SpawnLocationDown", "SpawnLocationLeft", "SpawnLocationUp", "SpawnLocationRight" }
@@ -94,16 +95,18 @@ public partial class wander : Node
                     {
                         ConversationManager.EnqueuePrioritizedDialog("Slime", "I can't open this door!");
                     }
-
                     break;
                 }
             }
+        }
+        else if (ConversationManager.RequestExit())
+        {
+            OnBackToMainMenuButtonPressed();
         }
         else
         {
             ConversationManager.PlayPrioritizedDialog();
         }
-
         // Shader
         var material = GetNode<ColorRect>("CanvasLayer/Vignette").Material as ShaderMaterial;
         material?.SetShaderParameter("player_pos", GetNode<player>("CanvasLayer/Player").Position / 1024);
@@ -125,14 +128,23 @@ public partial class wander : Node
     {
         // Reload lamps and Set NPC
         var npc = GetNode<npc>("CanvasLayer/NPC");
+        var traps = GetNode<TileMap>("CanvasLayer/Traps");
         if (LevelHandler.CurrentLevel.IsNPC)
         {
-            npc.CharacterName = LevelHandler.CurrentLevelNPCName;
+            traps.Hide();
             npc.Show();
+            npc.CharacterName = LevelHandler.CurrentLevelNPCName;
+        }
+        else if (LevelHandler.CurrentLevel.IsTrap)
+        {
+            npc.Hide();
+            traps.Show();
+            ConversationManager.OnTrapEntered();
         }
         else
         {
             npc.Hide();
+            traps.Hide();
         }
     }
 

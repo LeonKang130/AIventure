@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dm30dklrx00ly"]
+[gd_scene load_steps=26 format=3 uid="uid://dm30dklrx00ly"]
 
 [ext_resource type="Script" path="res://scripts/wander.cs" id="1_4s1lq"]
 [ext_resource type="Texture2D" uid="uid://j8cnd80vxmpw" path="res://arts/bricks.png" id="2_g4o47"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://do6kye7qy7kjp" path="res://scenes/light.tscn" id="7_c44oo"]
 [ext_resource type="Theme" uid="uid://b40wn4cvxp7h6" path="res://themes/dialog_label.tres" id="8_0oaay"]
 [ext_resource type="PackedScene" uid="uid://d3humr7ks4a5d" path="res://scenes/npc.tscn" id="8_hcmi8"]
+[ext_resource type="Texture2D" uid="uid://bcjmlk0ettdcs" path="res://arts/trap.png" id="9_vpxbs"]
 [ext_resource type="Texture2D" uid="uid://cy0phk1nrfwb0" path="res://arts/portrait-slime.png" id="10_mieq7"]
 [ext_resource type="Theme" uid="uid://qspkfo6ownp1" path="res://themes/button.tres" id="12_htgh7"]
 
@@ -78,6 +79,17 @@ shader_parameter/player_pos = Vector2(0.5, 0.5)
 shader_parameter/player_sight_radius = 0.3
 shader_parameter/light_effect_radius = 0.5
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7i866"]
+texture = ExtResource("9_vpxbs")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_u42bl"]
+sources/1 = SubResource("TileSetAtlasSource_7i866")
+
 [sub_resource type="Theme" id="Theme_bqbep"]
 
 [node name="Wander" type="Node"]
@@ -130,13 +142,6 @@ collision_mask = 2
 position = Vector2(512, 960)
 shape = SubResource("RectangleShape2D_h3v2j")
 
-[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog", "Pause") instance=ExtResource("5_broxm")]
-position = Vector2(512, 512)
-Dialog = NodePath("../../Dialog")
-Pause = NodePath("../../Pause")
-Speed = 512.0
-Direction = 3
-
 [node name="LightLeftTop" parent="CanvasLayer" instance=ExtResource("7_c44oo")]
 z_index = 2
 position = Vector2(192, 192)
@@ -177,6 +182,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.776471)
+
+[node name="Traps" type="TileMap" parent="CanvasLayer"]
+visible = false
+scale = Vector2(2.667, 2.667)
+tile_set = SubResource("TileSet_u42bl")
+format = 2
+layer_0/tile_data = PackedInt32Array(1048580, 1, 3, 1245191, 1, 3, 1245194, 1, 3, 1245197, 1, 3, 1245200, 1, 3, 1048595, 1, 3, 851987, 1, 3, 655379, 1, 3, 458771, 1, 3, 262160, 1, 3, 262157, 1, 3, 262154, 1, 3, 262151, 1, 3, 458756, 1, 3, 655364, 1, 3, 851972, 1, 3)
+
+[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog", "Pause") instance=ExtResource("5_broxm")]
+position = Vector2(512, 512)
+Dialog = NodePath("../../Dialog")
+Pause = NodePath("../../Pause")
+Speed = 512.0
+Direction = 3
 
 [node name="NPC" parent="CanvasLayer" instance=ExtResource("8_hcmi8")]
 position = Vector2(384, 384)

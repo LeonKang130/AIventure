@@ -14,7 +14,9 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
     let mutable name: string option = None
     let mutable prioritized: (string * string) list = []
     let mutable current = ConversationState.Inactive
-    let mutable streamed = false;
+    let mutable streamed = false
+    let mutable requestExit = false
+    let mutable requestExitPending = false
     let portrait = dialog.GetNode<TextureRect>("HSplitContainer/PortraitMargin/TextureRect")
     let label = dialog.GetNode<Label>("HSplitContainer/TextMargin/ScrollContainer/VBoxContainer/Label")
     let textEdit = dialog.GetNode<TextEdit>("HSplitContainer/TextMargin/TextEdit")
@@ -99,4 +101,20 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
                 prioritized <- successors
                 streamed <- true
                 this.ShowMessage character message
+            else
+                requestExit <- requestExitPending
         | _ -> ()
+    member this.IsEmpty() =
+        prioritized.IsEmpty
+    member this.RequestExit() =
+        requestExit
+    member this.OnTrapEntered() =
+        this.EnqueuePrioritizedDialog "Slime" "Damn, I think I just stepped into a trap!"
+        this.EnqueuePrioritizedDialog "Slime" "I guess I can't make it to the presentation now, hehe."
+        this.EnqueuePrioritizedDialog "Slime" "(Dead...)"
+        requestExitPending <- true
+    member this.OnTrapAvoided() =
+        this.EnqueuePrioritizedDialog "Slime" "Damn, I think I just stepped into a trap!"
+        this.EnqueuePrioritizedDialog "Slime" "Wait, I'm not hurt?!"
+        this.EnqueuePrioritizedDialog "Slime" "This item saved me! But it seems to be broken now. I'll just leave it here."
+        
