@@ -34,7 +34,7 @@ app.post('/chat', async(req, res) =>{ //req请求对象，res响应对象
     }
 })
 
-app.listen(3001, ()=>{
-    console.log('server running at http://localhost:3001/')
+app.listen(3000, ()=>{
+    console.log('server running at http://localhost:3000/')
 })
 
