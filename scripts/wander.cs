@@ -129,8 +129,10 @@ public partial class wander : Node
         // Reload lamps and Set NPC
         var npc = GetNode<npc>("CanvasLayer/NPC");
         var traps = GetNode<TileMap>("CanvasLayer/Traps");
+        var treasure = GetNode<treasure>("CanvasLayer/Treasure");
         if (LevelHandler.CurrentLevel.IsNPC)
         {
+            treasure.Hide();
             traps.Hide();
             npc.Show();
             npc.CharacterName = LevelHandler.CurrentLevelNPCName;
@@ -138,8 +140,16 @@ public partial class wander : Node
         else if (LevelHandler.CurrentLevel.IsTrap)
         {
             npc.Hide();
+            treasure.Hide();
             traps.Show();
             ConversationManager.OnTrapEntered();
+        }
+        else if (LevelHandler.CurrentLevel.IsTreasure)
+        {
+            npc.Hide();
+            treasure.opened = LevelHandler.CurrentLevelTreasureContent.IsEmpty;
+            treasure.Show();
+            traps.Hide();
         }
         else
         {

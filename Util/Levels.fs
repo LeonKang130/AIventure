@@ -2,10 +2,14 @@
 open System
 open Godot
 
+type TreasureStatus =
+    | Empty
+    | Item of (string * string)
+
 type Level =
     | Empty
     | Trap
-    | Treasure
+    | Treasure of TreasureStatus
     | NPC of string
     | Enemy of string
     | Destination
@@ -13,6 +17,7 @@ type Level =
 let MapWidth, MapHeight = 10, 10
 let MinJourneyLength = 6
 let TrapNum = 25
+let TreasureNum = 10
 
 type LevelHandler() =
     let random = Random()
@@ -64,6 +69,12 @@ type LevelHandler() =
                 location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
                 grid[location.X][location.Y] <- Trap
             GD.Print $"Trap At: {location.ToString()}"
+        for i in 0 .. TreasureNum - 1 do
+            let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            while grid[location.X][location.Y] <> Empty do
+                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            grid[location.X][location.Y] <- Level.Treasure(TreasureStatus.Empty)
+            GD.Print $"Treasure At: {location.ToString()}"
         grid
     let mutable visited =
         let mutable visited =
@@ -92,3 +103,7 @@ type LevelHandler() =
         match this.CurrentLevel with
         | Level.NPC(name) -> name
         | _ -> null
+    member this.CurrentLevelTreasureContent =
+        match this.CurrentLevel with
+        | Level.Treasure treasureStatus -> treasureStatus
+        | _ -> TreasureStatus.Empty

@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://cm8jg8vg72hqe"]
+
+[ext_resource type="Texture2D" uid="uid://b4pqkikniphuo" path="res://arts/treasure.png" id="1_4il1y"]
+[ext_resource type="Script" path="res://scripts/treasure.cs" id="1_monxx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2kp8"]
+atlas = ExtResource("1_4il1y")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aexu7"]
+atlas = ExtResource("1_4il1y")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cgid"]
+atlas = ExtResource("1_4il1y")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgs0u"]
+atlas = ExtResource("1_4il1y")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp2nd"]
+atlas = ExtResource("1_4il1y")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7bhp"]
+atlas = ExtResource("1_4il1y")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_joex3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2kp8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aexu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cgid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgs0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kp2nd")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7bhp")
+}],
+"loop": true,
+"name": &"opened",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q8ag"]
+size = Vector2(97, 91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8x4sa"]
+size = Vector2(256, 256)
+
+[node name="Treasure" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_monxx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.667, 2.667)
+sprite_frames = SubResource("SpriteFrames_joex3")
+autoplay = "default"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1.5, 8.5)
+shape = SubResource("RectangleShape2D_6q8ag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8x4sa")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnChestOpeningAnimationFinished"]
