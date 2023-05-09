@@ -1,11 +1,11 @@
 using Godot;
 using System;
+using Util;
 
 public partial class treasure : Area2D
 {
-	[Export]
-	public bool opened = false;
-
+	[Export] public bool opened = false;
+	[Export] public bool active = false;
 	private AnimatedSprite2D _animatedSprite2D => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -19,7 +19,7 @@ public partial class treasure : Area2D
 		
 	}
 
-	void OnChestOpened()
+	public void OnChestOpened()
 	{
 		if (opened) return;
 		opened = true;
@@ -33,6 +33,7 @@ public partial class treasure : Area2D
 	
 	public void Hide()
 	{
+		active = false;
 		_animatedSprite2D.Hide();
 		GetNode<CollisionShape2D>("CollisionShape2D").SetPhysicsProcess(false);
 		GetNode<CollisionShape2D>("StaticBody2D/CollisionShape2D").SetPhysicsProcess(false);
@@ -41,8 +42,9 @@ public partial class treasure : Area2D
 	
 	public void Show()
 	{
+		active = true;
+		_animatedSprite2D.Animation = new StringName(opened ? "opened" : "closed");
 		_animatedSprite2D.Show();
-		if (opened) _animatedSprite2D.Animation = new StringName("opened");
 		GetNode<CollisionShape2D>("CollisionShape2D").SetPhysicsProcess(true);
 		GetNode<CollisionShape2D>("StaticBody2D/CollisionShape2D").SetPhysicsProcess(true);
 		GetNode<StaticBody2D>("StaticBody2D").SetCollisionLayerValue(1, true);

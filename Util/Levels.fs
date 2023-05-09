@@ -1,25 +1,39 @@
 ﻿module Util.Levels
 open System
 open Godot
-
-type TreasureStatus =
+type Item =
     | Empty
-    | Item of (string * string)
+    | ItemDesc of string * string * string
+    member this.name =
+        match this with
+        | Empty -> "Nothing"
+        | ItemDesc(name, _, _) -> name
+    member this.description =
+        match this with
+        | Empty -> "Nothing"
+        | ItemDesc(_, description, _) -> description
+    member this.iconUrl =
+        match this with
+        | Empty -> "res://temp/item.png"
+        | ItemDesc(_, _, itemUrl) -> itemUrl
 
 type Level =
     | Empty
     | Trap
-    | Treasure of TreasureStatus
+    | Treasure of Item
     | NPC of string
     | Enemy of string
     | Destination
 
 let MapWidth, MapHeight = 10, 10
 let MinJourneyLength = 6
-let TrapNum = 25
-let TreasureNum = 10
+let TrapNum = 5
+let TreasureNum = 20
+let InventoryCapacity = 20
 
 type LevelHandler() =
+    let mutable itemPool =
+        [for _ in 0 .. TreasureNum - 1 -> ("Crystal Ball", "A crystal ball that seems to have magical power. It may be able to shelter you from danger.", "res://temp/item.png")]
     let random = Random()
     let spawn = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
     let destination =
@@ -73,8 +87,10 @@ type LevelHandler() =
             let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
             while grid[location.X][location.Y] <> Empty do
                 location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
-            grid[location.X][location.Y] <- Level.Treasure(TreasureStatus.Empty)
-            GD.Print $"Treasure At: {location.ToString()}"
+            let item = ItemDesc <| List.head itemPool
+            itemPool <- List.tail itemPool
+            grid[location.X][location.Y] <- Level.Treasure(item)
+            GD.Print $"Treasure({item.ToString()}) At: {location.ToString()}"
         grid
     let mutable visited =
         let mutable visited =
@@ -105,5 +121,13 @@ type LevelHandler() =
         | _ -> null
     member this.CurrentLevelTreasureContent =
         match this.CurrentLevel with
-        | Level.Treasure treasureStatus -> treasureStatus
-        | _ -> TreasureStatus.Empty
+        | Level.Treasure item -> item
+        | _ -> Item.Empty
+    member this.RemoveCurrentLevelTreasureContent() =
+        match this.CurrentLevel with
+        | Level.Treasure _ -> grid[current.X][current.Y] <- Treasure Item.Empty
+        | _ -> ()
+    member this.RemoveCurrentLevelTrap() =
+        match this.CurrentLevel with
+        | Level.Trap -> grid[current.X][current.Y] <- Empty
+        | _ -> ()

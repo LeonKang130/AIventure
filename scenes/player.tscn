@@ -4,8 +4,8 @@
 [ext_resource type="SpriteFrames" uid="uid://coiwiqkw8y5lf" path="res://animations/slime.tres" id="2_eeeyg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64bio"]
-radius = 13.8733
-height = 27.7465
+radius = 12.7484
+height = 36.7454
 
 [node name="Player" type="RigidBody2D"]
 collision_layer = 2
@@ -24,5 +24,6 @@ animation = &"idle-down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 24)
+rotation = 1.5708
 scale = Vector2(2.667, 2.667)
 shape = SubResource("CapsuleShape2D_64bio")

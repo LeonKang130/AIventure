@@ -53,7 +53,7 @@ public partial class npc : Area2D
 	public void Hide()
 	{
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Hide();
-		_emotion?.Hide();
+		_emotion.Hide();
 		GetNode<CollisionShape2D>("CollisionShape2D").SetPhysicsProcess(false);
 		GetNode<CollisionShape2D>("StaticBody2D/CollisionShape2D").SetPhysicsProcess(false);
 		GetNode<StaticBody2D>("StaticBody2D").SetCollisionLayerValue(1, false);

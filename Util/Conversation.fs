@@ -113,8 +113,8 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
         this.EnqueuePrioritizedDialog "Slime" "I guess I can't make it to the presentation now, hehe."
         this.EnqueuePrioritizedDialog "Slime" "(Dead...)"
         requestExitPending <- true
-    member this.OnTrapAvoided() =
+    member this.OnTrapAvoided (name: string) =
         this.EnqueuePrioritizedDialog "Slime" "Damn, I think I just stepped into a trap!"
         this.EnqueuePrioritizedDialog "Slime" "Wait, I'm not hurt?!"
-        this.EnqueuePrioritizedDialog "Slime" "This item saved me! But it seems to be broken now. I'll just leave it here."
+        this.EnqueuePrioritizedDialog "Slime" $"The {name} saved me! But it seems to be broken now. I'll just leave it here."
         

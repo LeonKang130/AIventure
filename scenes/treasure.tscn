@@ -34,7 +34,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_v2kp8")
 }],
 "loop": true,
-"name": &"default",
+"name": &"closed",
 "speed": 5.0
 }, {
 "frames": [{
@@ -76,7 +76,8 @@ script = ExtResource("1_monxx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.667, 2.667)
 sprite_frames = SubResource("SpriteFrames_joex3")
-autoplay = "default"
+animation = &"closed"
+autoplay = "closed"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -87,4 +88,4 @@ shape = SubResource("RectangleShape2D_6q8ag")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8x4sa")
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnChestOpeningAnimationFinished"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="OnChestOpeningAnimationFinished"]
