@@ -153,6 +153,7 @@ public partial class wander : Node
         }
         else
         {
+            treasure.Hide();
             npc.Hide();
             traps.Hide();
         }
