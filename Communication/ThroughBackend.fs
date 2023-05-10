@@ -87,7 +87,7 @@ type ChatBotHandler(directory: string) =
                 setting :: cache @ [queryPrompt]
                 |> Json.serialize
             let! result = Http.AsyncRequest(
-                "http://183.172.163.109:3000/chat",
+                "http://123.56.9.221:3000/chat",
                 httpMethod = "POST",
                 body = HttpRequestBody.FormValues(
                     [("messages", prompts)]
