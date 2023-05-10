@@ -20,4 +20,8 @@
       <PackageReference Include="OpenAI-DotNet" Version="6.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
 </Project>

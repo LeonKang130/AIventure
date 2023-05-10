@@ -153,8 +153,8 @@ public partial class wander : Node
 		{
 			treasure.Hide();
 			traps.Hide();
-			npc.Show();
 			npc.CharacterName = LevelHandler.CurrentLevelNPCName;
+			npc.Show();
 		}
 		else if (LevelHandler.CurrentLevel.IsTrap)
 		{
@@ -239,13 +239,14 @@ public partial class wander : Node
 
 	void OnNPCPlayerEnter(string name)
 	{
+		if (!LevelHandler.CurrentLevel.IsNPC) return;
 		ConversationManager.SetInteractableCharacterName(name);
 		_interaction = InteractionType.NPCConversation;
 	}
 
 	void OnNPCPlayerExit(string name)
 	{
-		if (name != ConversationManager.GetInteractableCharacterName()) return;
+		if (name != ConversationManager.GetInteractableCharacterName() || !LevelHandler.CurrentLevel.IsNPC) return;
 		ConversationManager.SetInteractableCharacterName(null);
 		if (_interaction != InteractionType.NPCConversation) return;
 		_interaction = InteractionType.None;
@@ -253,12 +254,14 @@ public partial class wander : Node
 
 	void OnTreasurePlayerEnter(Node2D _)
 	{
-		_interaction = InteractionType.OpenTreasureChest;
+		if (LevelHandler.CurrentLevel.IsTreasure)
+			_interaction = InteractionType.OpenTreasureChest;
 	}
 
 	void OnTreasurePlayerExit(Node2D _)
 	{
-		_interaction = InteractionType.None;
+		if (LevelHandler.CurrentLevel.IsTreasure)
+			_interaction = InteractionType.None;
 	}
 
 	void OnBackToMainMenuButtonPressed()
