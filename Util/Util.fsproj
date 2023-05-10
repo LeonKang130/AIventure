@@ -23,4 +23,8 @@
       <ProjectReference Include="..\Communication\Communication.fsproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
 </Project>
