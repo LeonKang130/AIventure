@@ -1,35 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj": {}
+    "/Users/xcj/AIventure/Communication/Communication.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj": {
+    "/Users/xcj/AIventure/Communication/Communication.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj",
+        "projectUniqueName": "/Users/xcj/AIventure/Communication/Communication.fsproj",
         "projectName": "Communication",
-        "projectPath": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj",
-        "packagesPath": "C:\\Users\\kang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\obj\\",
+        "projectPath": "/Users/xcj/AIventure/Communication/Communication.fsproj",
+        "packagesPath": "/Users/xcj/.nuget/packages/",
+        "outputPath": "/Users/xcj/AIventure/Communication/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Users\\kang\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/xcj/.nuget/NuGet/NuGet.Config",
+          "/Users/xcj/.nuget/NuGet/config/Godot.Offline.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.100\\FSharp\\library-packs": {},
+          "/usr/local/share/dotnet/sdk/6.0.406/FSharp/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,7 +41,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[7.0.0, )",
+              "version": "[6.0.7, )",
               "generatePathProperty": true
             },
             "FSharp.Data": {
@@ -96,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.406/RuntimeIdentifierGraph.json"
         }
       }
     }
