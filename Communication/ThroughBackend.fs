@@ -86,14 +86,16 @@ type ChatBotHandler(directory: string) =
             let prompts =
                 setting :: cache @ [queryPrompt]
                 |> Json.serialize
+            GD.Print prompts
             let! result = Http.AsyncRequest(
-                "http://183.172.163.109:3000/chat",
+                "http://123.56.9.221:3000/chat",
                 httpMethod = "POST",
                 body = HttpRequestBody.FormValues(
                     [("messages", prompts)]
                     |> Seq.ofList
-                )
+                ),
+                silentHttpErrors = false
             )
-            GD.Print result
+            GD.Print result.StatusCode
             return "(unrecognized mumbling...)"
         }
