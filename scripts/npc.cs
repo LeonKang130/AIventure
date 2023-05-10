@@ -62,8 +62,8 @@ public partial class npc : Area2D
 
 	public void Show()
 	{
-		GetNode<AnimatedSprite2D>("AnimatedSprite2D").SpriteFrames =
-			ResourceLoader.Load<SpriteFrames>($"res://animations/{CharacterName.ToLower()}.tres");
+        GetNode<AnimatedSprite2D>("AnimatedSprite2D").SpriteFrames =
+            ResourceLoader.Load<SpriteFrames>($"res://animations/{CharacterName.ToLower()}.tres");
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").SetPhysicsProcess(true);
 		GetNode<CollisionShape2D>("StaticBody2D/CollisionShape2D").SetPhysicsProcess(true);
