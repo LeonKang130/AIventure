@@ -196,16 +196,18 @@ layer_0/tile_data = PackedInt32Array(1048580, 1, 3, 1245191, 1, 3, 1245194, 1, 3
 [node name="Treasure" parent="CanvasLayer" instance=ExtResource("10_6duox")]
 position = Vector2(512, 512)
 
-[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog", "Pause", "Wander") instance=ExtResource("5_broxm")]
+[node name="Player" parent="CanvasLayer" node_paths=PackedStringArray("Dialog", "Pause", "Wander", "Inventory") instance=ExtResource("5_broxm")]
 position = Vector2(512, 512)
 Dialog = NodePath("../../Dialog")
 Pause = NodePath("../../Pause")
 Wander = NodePath("..")
+Inventory = NodePath("../../Inventory")
 Speed = 512.0
 Direction = 3
 
 [node name="NPC" parent="CanvasLayer" instance=ExtResource("8_hcmi8")]
 position = Vector2(384, 384)
+CharacterName = "Harold"
 
 [node name="Bound" parent="." instance=ExtResource("6_4bo40")]
 

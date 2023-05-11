@@ -3,19 +3,22 @@ open System
 open Godot
 type Item =
     | Empty
-    | ItemDesc of string * string * string
+    | ItemDesc of string * string * ImageTexture
     member this.name =
         match this with
-        | Empty -> "Nothing"
+        | Empty -> "crystal ball"
         | ItemDesc(name, _, _) -> name
     member this.description =
         match this with
-        | Empty -> "Nothing"
+        | Empty -> "A crystal ball that seems to have magical power. It may be able to shelter you from danger."
         | ItemDesc(_, description, _) -> description
-    member this.iconUrl =
+    member this.imageTexture =
         match this with
-        | Empty -> "res://temp/item.png"
-        | ItemDesc(_, _, itemUrl) -> itemUrl
+        | Empty ->
+            "res://temp/crystal ball.png"
+            |> Image.LoadFromFile
+            |> ImageTexture.CreateFromImage
+        | ItemDesc(_, _, imageTexture) -> imageTexture
 
 type Level =
     | Empty
@@ -33,7 +36,11 @@ let InventoryCapacity = 20
 
 type LevelHandler() =
     let mutable itemPool =
-        [for _ in 0 .. TreasureNum - 1 -> ("Crystal Ball", "A crystal ball that seems to have magical power. It may be able to shelter you from danger.", "res://temp/item.png")]
+        let imageTexture =
+            "res://temp/crystal ball.png"
+            |> Image.LoadFromFile
+            |> ImageTexture.CreateFromImage
+        [for _ in 0 .. TreasureNum - 1 -> ("crystal ball", "A crystal ball that seems to have magical power. It may be able to shelter you from danger.", imageTexture)]
     let random = Random()
     let spawn = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
     let destination =

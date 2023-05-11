@@ -28,8 +28,10 @@ public partial class wander : Node
 	private Vector2I Destination => LevelHandler.Destination;
 	private bool IsPaused => GetNode<CanvasLayer>("Pause").Visible;
 	private CanvasLayer Dialog => GetNode<CanvasLayer>("Dialog");
+	private CanvasLayer Inventory => GetNode<CanvasLayer>("Inventory");
 	private bool ExitRequested = false;
-	private List<Levels.Item> _inventory = new List<Levels.Item>();
+	private List<Levels.Item> _inventory = new();
+	private int _inventoryItemIndex = 0;
 	private Marker2D[] SpawnMarkers =>
 		new List<string> { "SpawnLocationDown", "SpawnLocationLeft", "SpawnLocationUp", "SpawnLocationRight" }
 			.Select(markerName => GetNode<Marker2D>("PlayerSpawnLocations/" + markerName))
@@ -68,6 +70,41 @@ public partial class wander : Node
 			GetNode<CanvasLayer>("Pause").Visible ^= true;
 		}
 		else if (IsPaused || !GetNode<CanvasLayer>("CanvasLayer").Visible) return;
+		else if (Input.IsActionJustPressed("toggle_inventory"))
+		{
+			if (!Inventory.Visible && _inventory.Count == 0)
+			{
+				ConversationManager.EnqueuePrioritizedDialog("Slime", "I have nothing on me yet.");
+			}
+			else
+			{
+				if (!Inventory.Visible)
+				{
+					_inventoryItemIndex = 0;
+					GetNode<TextureRect>("Inventory/Item/Icon").Texture = _inventory[_inventoryItemIndex].imageTexture;
+					GetNode<Label>("Inventory/Item/Name").Text = _inventory[_inventoryItemIndex].name;
+					GetNode<Label>("Inventory/Item/Description").Text = _inventory[_inventoryItemIndex].description;
+				}
+				Inventory.Visible ^= true;
+			}
+		}
+		else if (Inventory.Visible)
+		{
+			if (Input.IsActionJustPressed("move_left"))
+			{
+				_inventoryItemIndex = (_inventoryItemIndex + _inventory.Count - 1) % _inventory.Count;
+				GetNode<TextureRect>("Inventory/Item/Icon").Texture = _inventory[_inventoryItemIndex].imageTexture;
+				GetNode<Label>("Inventory/Item/Name").Text = _inventory[_inventoryItemIndex].name;
+				GetNode<Label>("Inventory/Item/Description").Text = _inventory[_inventoryItemIndex].description;
+			}
+			else if (Input.IsActionJustPressed("move_right"))
+			{
+				_inventoryItemIndex = (_inventoryItemIndex + 1) % _inventory.Count;
+				GetNode<TextureRect>("Inventory/Item/Icon").Texture = _inventory[_inventoryItemIndex].imageTexture;
+				GetNode<Label>("Inventory/Item/Name").Text = _inventory[_inventoryItemIndex].name;
+				GetNode<Label>("Inventory/Item/Description").Text = _inventory[_inventoryItemIndex].description;
+			}
+		}
 		else if (Input.IsActionJustPressed("continue_dialog"))
 		{
 			ConversationManager.OnContinueDialog();

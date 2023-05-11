@@ -5,9 +5,11 @@ public partial class player : RigidBody2D
 	[Export] public CanvasLayer Dialog;
 	[Export] public CanvasLayer Pause;
 	[Export] public CanvasLayer Wander;
+	[Export] public CanvasLayer Inventory;
 	private bool IsWandering => Wander is { Visible: true };
 	private bool IsInDialog => Dialog is { Visible: true };
 	private bool IsPaused => Pause is { Visible: true };
+	private bool IsInInventory => Inventory is { Visible: true };
 	public enum FacingDirection
 	{
 		Up = 0,
@@ -39,7 +41,7 @@ public partial class player : RigidBody2D
 	{
 		var velocity = Vector2.Zero;
 		var idle = true;
-		if (IsWandering && !IsInDialog && !IsPaused)
+		if (IsWandering && !IsInDialog && !IsPaused && !IsInInventory)
 		{
 			if (Input.IsActionPressed("move_left"))
 			{
