@@ -21,7 +21,6 @@ Triggered = true
 scale = Vector2(2.667, 2.667)
 sprite_frames = ExtResource("1_8nvu6")
 animation = &"idle-down"
-autoplay = "idle-down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2dpp0")

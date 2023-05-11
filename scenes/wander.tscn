@@ -206,7 +206,6 @@ Direction = 3
 
 [node name="NPC" parent="CanvasLayer" instance=ExtResource("8_hcmi8")]
 position = Vector2(384, 384)
-CharacterName = "Harold"
 
 [node name="Bound" parent="." instance=ExtResource("6_4bo40")]
 

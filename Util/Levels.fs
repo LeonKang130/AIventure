@@ -71,6 +71,8 @@ type LevelHandler() =
         // map initialization here
         grid[spawn.X][spawn.Y] <- Level.NPC("Harold")
         grid[destination.X][destination.Y] <- Level.NPC("Devil")
+        // grid[spawn.X][spawn.Y + 1] <- Level.NPC("Wizard")
+        grid[(spawn.X + destination.X) / 2][(spawn.Y + destination.Y) / 2] <- Level.NPC("Guard")
         for i in 0 .. TrapNum - 1 do
             let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
             while grid[location.X][location.Y] <> Empty do
