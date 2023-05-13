@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dm30dklrx00ly"]
+[gd_scene load_steps=28 format=3 uid="uid://dm30dklrx00ly"]
 
 [ext_resource type="Script" path="res://scripts/wander.cs" id="1_4s1lq"]
 [ext_resource type="Texture2D" uid="uid://j8cnd80vxmpw" path="res://arts/bricks.png" id="2_g4o47"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cm8jg8vg72hqe" path="res://scenes/treasure.tscn" id="10_6duox"]
 [ext_resource type="Texture2D" uid="uid://cy0phk1nrfwb0" path="res://arts/portrait-slime.png" id="10_mieq7"]
 [ext_resource type="Theme" uid="uid://qspkfo6ownp1" path="res://themes/button.tres" id="12_htgh7"]
-[ext_resource type="Texture2D" uid="uid://dhg7lt3k8djkl" path="res://temp/item.png" id="14_cafs4"]
 [ext_resource type="Theme" uid="uid://dlpv1poq8gcth" path="res://themes/label.tres" id="15_gr1wg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_benua"]
@@ -329,7 +328,6 @@ offset_top = -150.0
 offset_right = 121.0
 offset_bottom = 90.0
 grow_vertical = 2
-texture = ExtResource("14_cafs4")
 
 [node name="Name" type="Label" parent="Inventory/Item"]
 layout_mode = 1

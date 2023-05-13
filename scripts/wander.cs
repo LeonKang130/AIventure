@@ -70,7 +70,7 @@ public partial class wander : Node
 			GetNode<CanvasLayer>("Pause").Visible ^= true;
 		}
 		else if (IsPaused || !GetNode<CanvasLayer>("CanvasLayer").Visible) return;
-		else if (Input.IsActionJustPressed("toggle_inventory"))
+		else if (!Dialog.Visible && Input.IsActionJustPressed("toggle_inventory"))
 		{
 			if (!Inventory.Visible && _inventory.Count == 0)
 			{
