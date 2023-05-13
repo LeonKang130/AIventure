@@ -9,7 +9,7 @@
       "Util/1.0.0": {
         "dependencies": {
           "Communication": "1.0.0",
-          "FSharp.Core": "7.0.0",
+          "FSharp.Core": "6.0.7",
           "Godot.SourceGenerators": "4.0.0",
           "GodotSharp": "4.0.0",
           "GodotSharpEditor": "4.0.0"
@@ -18,11 +18,11 @@
           "Util.dll": {}
         }
       },
-      "FSharp.Core/7.0.0": {
+      "FSharp.Core/6.0.7": {
         "runtime": {
           "lib/netstandard2.1/FSharp.Core.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51310"
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.722.51308"
           }
         },
         "resources": {
@@ -69,7 +69,7 @@
       },
       "FSharp.Data/5.0.2": {
         "dependencies": {
-          "FSharp.Core": "7.0.0"
+          "FSharp.Core": "6.0.7"
         },
         "runtime": {
           "lib/netstandard2.0/FSharp.Data.dll": {
@@ -80,7 +80,7 @@
       },
       "FSharp.Json.New/0.4.2": {
         "dependencies": {
-          "FSharp.Core": "7.0.0"
+          "FSharp.Core": "6.0.7"
         },
         "runtime": {
           "lib/netstandard2.0/FSharp.Json.New.dll": {
@@ -119,7 +119,7 @@
       },
       "Communication/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "7.0.0",
+          "FSharp.Core": "6.0.7",
           "FSharp.Data": "5.0.2",
           "FSharp.Json.New": "0.4.2",
           "Godot.SourceGenerators": "4.0.0",
@@ -139,12 +139,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "FSharp.Core/7.0.0": {
+    "FSharp.Core/6.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xPww0dhsH7o373ZNFY1Y08WRsJJUUzqGk0AIUxxUxSJkWqul0UwCBXg6UmqJX76VdiSvvEXn4SYwX8lYQaZzuQ==",
-      "path": "fsharp.core/7.0.0",
-      "hashPath": "fsharp.core.7.0.0.nupkg.sha512"
+      "sha512": "sha512-e6wGrq5smV3Yk2fBE/Y0nBG5oFyF59k5Je0a0QDydUpg6liyaafGjD3xvutciKepCP2knspZ/sWViC/F1OyyQQ==",
+      "path": "fsharp.core/6.0.7",
+      "hashPath": "fsharp.core.6.0.7.nupkg.sha512"
     },
     "FSharp.Data/5.0.2": {
       "type": "package",
@@ -163,21 +163,21 @@
     "Godot.SourceGenerators/4.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-u+xcapvfVha2BtTF7cRHrNfo+mxH4uGsJrEDQFM3FG+Kww61m2Qs/s2IqgEzR/CLFwidrdgn624xFHk738KnQw==",
+      "sha512": "sha512-Q2y2g4L1mO62/QFsR2bH3ywdIYvE0xbEx4yJ/Me+t6xuoigFVxKFxWhP0yFYDCh3PxdaVeuqJV3Y6S+8U78INA==",
       "path": "godot.sourcegenerators/4.0.0",
       "hashPath": "godot.sourcegenerators.4.0.0.nupkg.sha512"
     },
     "GodotSharp/4.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SbiM07Eh6m1vASfzSIMIfwdpFvI6E+c0+VA5aOB3SKl/pWnl8ToAc8eR1wbjBnkw7D13A8+Nk8j/AJvWiHOCTw==",
+      "sha512": "sha512-wYnnG9kXdoeACIz2EGNwwd8LHVx1BP9vdlOsw8qvYgno8PYgzXAUsIC1S+atXUP6IVRCtPEwO1TcUUZG9cjTqg==",
       "path": "godotsharp/4.0.0",
       "hashPath": "godotsharp.4.0.0.nupkg.sha512"
     },
     "GodotSharpEditor/4.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VmNKvHgFdK67l/e8BfUqzVSXS3wZqZhYREdh1VKzZCY61vKxXqppIUcUb8QzsS0RaK00jXVK4LqlcxrgpG9sUQ==",
+      "sha512": "sha512-SgpReFIUklzrA1wzgdWxO3PPuAPZhnjr/OVLssVg7JN2/PSh9eVdB6HjbT3dzen0R0lFQt0ZuHTlTDbW/Y0acQ==",
       "path": "godotsharpeditor/4.0.0",
       "hashPath": "godotsharpeditor.4.0.0.nupkg.sha512"
     },
