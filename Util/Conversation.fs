@@ -79,6 +79,7 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
                             |> (fun task -> task.WaitAsync timeout)
                             |> Async.AwaitTask
                             |> Async.Catch
+                    GD.Print (sprintf "%A" result)
                     match result with
                     | Choice1Of2 response ->
                         this.ShowMessage character response

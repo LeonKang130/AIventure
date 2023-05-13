@@ -26,7 +26,7 @@ type ChatBotHandler(directory: string) =
             ChatPrompt("user", "Is it safe around here?")
             ChatPrompt("assistant", "It's none of my business.")
         ]
-    member this.ConversationSettings =
+    let ConversationSettings =
         if Directory.Exists directory then
             let mutable ground_truth_info = ""
             Directory.EnumerateDirectories directory
@@ -47,7 +47,7 @@ type ChatBotHandler(directory: string) =
         else
             failwith "Character settings not found"
             Map.empty<string, string>
-    member this.ConversationCache =
+    let mutable ConversationCache =
         if Directory.Exists directory then
             Directory.EnumerateDirectories directory
             |> Seq.map (fun path ->
@@ -64,6 +64,7 @@ type ChatBotHandler(directory: string) =
                     |> Seq.map (fun line -> line.Trim())
                     |> Seq.filter (fun line -> line.Length <> 0)
                     |> Seq.map (fun line ->
+                            GD.Print line
                             let [| role; message |] =
                                 line.Split(":", StringSplitOptions.TrimEntries)
                                 |> Array.take 2
@@ -79,15 +80,14 @@ type ChatBotHandler(directory: string) =
         task {
             let key = character.ToLower()
             let setting = 
-                this.ConversationSettings.GetValueOrDefault (key, DefaultSetting)
+                ConversationSettings.GetValueOrDefault (key, DefaultSetting)
                 |> (fun t -> t.Replace("GROUND_TRUTH", groundTruth))
                 |> (fun t -> ChatPrompt("system", t))
-            let cache = this.ConversationCache.GetValueOrDefault (key, DefaultCache)
+            let cache = ConversationCache.GetValueOrDefault (key, DefaultCache)
             let queryPrompt = ChatPrompt("user", query)
             let prompts =
                 setting :: cache @ [queryPrompt]
                 |> Json.serialize
-            GD.Print prompts
             let! result = Http.AsyncRequest(
                 "http://43.153.90.127:3000/chat",
                 httpMethod = "POST",
@@ -95,8 +95,17 @@ type ChatBotHandler(directory: string) =
                     [("messages", prompts)]
                     |> Seq.ofList
                 ),
-                silentHttpErrors = false
+                silentHttpErrors = true
             )
-            GD.Print result.StatusCode
-            return "(unrecognized mumbling...)"
+            let text =
+                match result.Body with
+                | Text t ->
+                    if t.Trim() = "Pardon our dust" then "(unrecognized mumbling...)"
+                    else
+                        ConversationCache.Item(key) <-
+                            cache @ [queryPrompt; ChatPrompt("assistant", t)]
+                            |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
+                        t
+                | _ -> "(unrecognized mumbling...)"
+            return text
         }
