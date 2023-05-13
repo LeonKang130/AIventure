@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2ikjdow436gs"]
+
+[ext_resource type="Script" path="res://scripts/start.cs" id="1_446tn"]
+[ext_resource type="Texture2D" uid="uid://5dnr4c2nq0i2" path="res://arts/splashscreen.png" id="2_ju3gp"]
+[ext_resource type="Theme" uid="uid://c588cn6yknnwf" path="res://themes/title.tres" id="3_5mow1"]
+[ext_resource type="Theme" uid="uid://qspkfo6ownp1" path="res://themes/button.tres" id="4_fjfvn"]
+[ext_resource type="Theme" uid="uid://dlpv1poq8gcth" path="res://themes/label.tres" id="5_02btf"]
+[ext_resource type="Theme" uid="uid://ffjqwq4pr8nm" path="res://themes/scroll.tres" id="6_7h0pp"]
+
+[node name="Start" type="Node"]
+script = ExtResource("1_446tn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ju3gp")
+expand_mode = 5
+
+[node name="StartMenu" type="CanvasLayer" parent="CanvasLayer"]
+
+[node name="Title" type="Label" parent="CanvasLayer/StartMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -287.0
+offset_right = 246.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_5mow1")
+text = "AIventure"
+
+[node name="StartButton" type="Button" parent="CanvasLayer/StartMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.5
+offset_top = -43.0
+offset_right = 88.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_fjfvn")
+text = "Start"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/StartMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.5
+offset_top = 74.0
+offset_right = 141.5
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_fjfvn")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/StartMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.5
+offset_top = 191.0
+offset_right = 141.5
+offset_bottom = 277.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_fjfvn")
+text = "Quit"
+
+[node name="SettingsMenu" type="CanvasLayer" parent="CanvasLayer"]
+visible = false
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/SettingsMenu"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 61.0
+offset_top = -204.0
+offset_right = -26.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/SettingsMenu/HSplitContainer"]
+layout_mode = 2
+theme = ExtResource("5_02btf")
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SettingsMenu/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HScrollBar" type="HScrollBar" parent="CanvasLayer/SettingsMenu/HSplitContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("6_7h0pp")
+min_value = 0.001
+max_value = 10.0
+value = 1.0
+exp_edit = true
+
+[node name="Back" type="Button" parent="CanvasLayer/SettingsMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 188.0
+offset_right = 83.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_fjfvn")
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/StartMenu/StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/StartMenu/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/StartMenu/QuitButton" to="." method="OnQuitButtonPressed"]
+[connection signal="value_changed" from="CanvasLayer/SettingsMenu/HSplitContainer/MarginContainer/HScrollBar" to="." method="OnVolumeSettingChanged"]
+[connection signal="pressed" from="CanvasLayer/SettingsMenu/Back" to="." method="OnSettingsBackButtonPressed"]

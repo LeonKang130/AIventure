@@ -1,0 +1,9 @@
+C:\Users\kang\Desktop\AIventure\Communication\bin\ExportDebug\net6.0\Communication.deps.json
+C:\Users\kang\Desktop\AIventure\Communication\bin\ExportDebug\net6.0\Communication.dll
+C:\Users\kang\Desktop\AIventure\Communication\bin\ExportDebug\net6.0\Communication.pdb
+C:\Users\kang\Desktop\AIventure\Communication\obj\ExportDebug\net6.0\Communication.fsproj.AssemblyReference.cache
+C:\Users\kang\Desktop\AIventure\Communication\obj\ExportDebug\net6.0\Communication.AssemblyInfoInputs.cache
+C:\Users\kang\Desktop\AIventure\Communication\obj\ExportDebug\net6.0\Communication.AssemblyInfo.fs
+C:\Users\kang\Desktop\AIventure\Communication\obj\ExportDebug\net6.0\Communication.fsproj.CoreCompileInputs.cache
+C:\Users\kang\Desktop\AIventure\Communication\obj\ExportDebug\net6.0\Communication.dll
+C:\Users\kang\Desktop\AIventure\Communication\obj\ExportDebug\net6.0\Communication.pdb

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c87788sbvyp36"]
+
+[ext_resource type="Script" path="res://scripts/player.cs" id="1_oetg5"]
+[ext_resource type="SpriteFrames" uid="uid://coiwiqkw8y5lf" path="res://animations/slime.tres" id="2_eeeyg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_64bio"]
+radius = 12.7484
+height = 36.7454
+
+[node name="Player" type="RigidBody2D"]
+collision_layer = 2
+mass = 0.25
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp_mode = 1
+linear_damp = 8.0
+script = ExtResource("1_oetg5")
+Speed = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.667, 2.667)
+sprite_frames = ExtResource("2_eeeyg")
+animation = &"idle-down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+rotation = 1.5708
+scale = Vector2(2.667, 2.667)
+shape = SubResource("CapsuleShape2D_64bio")

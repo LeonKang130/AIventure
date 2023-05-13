@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3humr7ks4a5d"]
+
+[ext_resource type="Script" path="res://scripts/npc.cs" id="1_0dhto"]
+[ext_resource type="SpriteFrames" uid="uid://ivb4vsmt0iwk" path="res://animations/harold.tres" id="1_8nvu6"]
+[ext_resource type="PhysicsMaterial" uid="uid://crmbewurewwg5" path="res://physics/smooth.tres" id="2_7aivu"]
+[ext_resource type="SpriteFrames" uid="uid://dbburmebdkei8" path="res://animations/chat.tres" id="4_biil1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dpp0"]
+size = Vector2(256, 256)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qt61g"]
+radius = 42.0
+height = 132.0
+
+[node name="NPC" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_0dhto")
+Triggered = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.667, 2.667)
+sprite_frames = ExtResource("1_8nvu6")
+animation = &"idle-down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2dpp0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+physics_material_override = ExtResource("2_7aivu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_qt61g")
+
+[node name="Emotion" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(53, -56)
+sprite_frames = ExtResource("4_biil1")
+animation = &"frustrated"
+
+[connection signal="body_entered" from="." to="." method="OnPlayerEnterArea"]
+[connection signal="body_exited" from="." to="." method="OnPlayerExitArea"]

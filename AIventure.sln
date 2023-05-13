@@ -1,0 +1,35 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIventure", "AIventure.csproj", "{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Communication", "Communication\Communication.fsproj", "{8BA15651-1016-4595-A5B6-3D5AF74B04FD}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Util", "Util\Util.fsproj", "{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{87C8E774-DBEF-4BE0-8D4B-688A34AAA848}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{8BA15651-1016-4595-A5B6-3D5AF74B04FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA15651-1016-4595-A5B6-3D5AF74B04FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA15651-1016-4595-A5B6-3D5AF74B04FD}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA15651-1016-4595-A5B6-3D5AF74B04FD}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA15651-1016-4595-A5B6-3D5AF74B04FD}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA15651-1016-4595-A5B6-3D5AF74B04FD}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{86ECC8AF-2A7A-482E-B8CC-E65E34A0DF77}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Program.fs" />
+        <Compile Include="SkipBackend.fs" />
+        <Compile Include="ThroughBackend.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FSharp.Data" Version="5.0.2" />
+      <PackageReference Include="FSharp.Json.New" Version="0.4.2" />
+      <PackageReference Include="Godot.SourceGenerators" Version="4.0.0" />
+      <PackageReference Include="GodotSharp" Version="4.0.0" />
+      <PackageReference Include="GodotSharpEditor" Version="4.0.0" />
+      <PackageReference Include="OpenAI-DotNet" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
+</Project>

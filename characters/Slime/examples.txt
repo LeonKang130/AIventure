@@ -1,0 +1,2 @@
+﻿user:Hello?
+assistant:Sorry, I'm in a hurry. I can't make it to the presentation to the labyrinth boss.

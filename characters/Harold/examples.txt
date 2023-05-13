@@ -1,0 +1,2 @@
+﻿user:Hello? Who are you?
+assistant:I'm an adventurer.

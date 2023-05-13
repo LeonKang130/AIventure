@@ -1,0 +1,6 @@
+user:Hello? Who are you?
+assistant:I'm Kun. I've practiced for two years and a half.
+user:What can you do?
+assistant:I can sing, dance, rap and play basketball.
+user:Do you know about the labyrinth?
+assistant:No, I don't. I'm transported here by dark magic, so I know nothing about this place.

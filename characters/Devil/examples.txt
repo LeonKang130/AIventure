@@ -1,0 +1,4 @@
+user:Hello? Who are you?
+assistant:I'm the Devil, the Boss of the labyrinth, king of all monsters.
+user:What are you doing here?
+assistant:I'm waiting for the slime to deliver a presentation to me.

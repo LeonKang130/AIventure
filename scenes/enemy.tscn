@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dlvcrssane1y6"]
+
+[node name="Enemy" type="Node"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

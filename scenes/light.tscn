@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://do6kye7qy7kjp"]
+
+[ext_resource type="Texture2D" uid="uid://m1pqbfm04na5" path="res://arts/light_mask.webp" id="1_qp88l"]
+[ext_resource type="Script" path="res://scripts/candles.cs" id="2_lbheq"]
+[ext_resource type="SpriteFrames" uid="uid://dw6kcutae0e5v" path="res://animations/light.tres" id="3_2vso4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x845l"]
+radius = 18.0
+height = 38.0
+
+[node name="Candles" type="PointLight2D"]
+color = Color(1, 0.65098, 0.121569, 1)
+energy = 0.6
+texture = ExtResource("1_qp88l")
+script = ExtResource("2_lbheq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_2vso4")
+animation = &"campfire"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_x845l")

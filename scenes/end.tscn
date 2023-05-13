@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dcw5f2gony6jq"]
+
+[node name="End" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Message" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
