@@ -15,13 +15,10 @@ let ChatPrompt (role, content) = { role = role; content = content }
 type ChatBotHandler(directory: string) =
     let MAX_MEMORY_LENGTH = 20
     let DefaultSetting =
-            ChatPrompt(
-                "system",
-                "Play as an stranger in the labyrinth.\
-                You don't want to talk with others.\
-                You don't want to go anywhere except for staying here.\
-                Reply to the user in his voice."
-            )
+        "Play as an stranger in the labyrinth.\
+        You don't want to talk with others.\
+        You don't want to go anywhere except for staying here.\
+        Reply to the user in his voice."
     let DefaultCache =
         [
             ChatPrompt("user", "Hello?")
@@ -31,6 +28,7 @@ type ChatBotHandler(directory: string) =
         ]
     member this.ConversationSettings =
         if Directory.Exists directory then
+            let mutable ground_truth_info = ""
             Directory.EnumerateDirectories directory
             |> Seq.map (fun path ->
                 let name =
@@ -42,13 +40,13 @@ type ChatBotHandler(directory: string) =
                     [| path; "setting.txt" |]
                     |> Path.Join
                     |> File.ReadAllText
-                    |> fun message -> ChatPrompt("system", message.Trim())
+                    |> fun message -> message.Trim()
                 (name, setting)
             )
             |> Map.ofSeq
         else
             failwith "Character settings not found"
-            Map.empty<string, Prompt>
+            Map.empty<string, string>
     member this.ConversationCache =
         if Directory.Exists directory then
             Directory.EnumerateDirectories directory
@@ -77,10 +75,13 @@ type ChatBotHandler(directory: string) =
             |> Dictionary<string, Prompt list>
         else
             Dictionary<string, Prompt list>()
-    member this.GetAPIResponse (character: string) (query: string) =
+    member this.GetAPIResponse (character: string) (query: string) (groundTruth: string) =
         task {
             let key = character.ToLower()
-            let setting = this.ConversationSettings.GetValueOrDefault (key, DefaultSetting)
+            let setting = 
+                this.ConversationSettings.GetValueOrDefault (key, DefaultSetting)
+                |> (fun t -> t.Replace("GROUND_TRUTH", groundTruth))
+                |> (fun t -> ChatPrompt("system", t))
             let cache = this.ConversationCache.GetValueOrDefault (key, DefaultCache)
             let queryPrompt = ChatPrompt("user", query)
             let prompts =
@@ -88,7 +89,7 @@ type ChatBotHandler(directory: string) =
                 |> Json.serialize
             GD.Print prompts
             let! result = Http.AsyncRequest(
-                "http://123.56.9.221:3000/chat",
+                "http://43.153.90.127:3000/chat",
                 httpMethod = "POST",
                 body = HttpRequestBody.FormValues(
                     [("messages", prompts)]

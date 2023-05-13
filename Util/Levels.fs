@@ -1,6 +1,7 @@
 ﻿module Util.Levels
 open System
 open Godot
+open System.Collections.Generic
 type Item =
     | Empty
     | ItemDesc of string * string * ImageTexture
@@ -33,6 +34,7 @@ let MinJourneyLength = 6
 let TrapNum = 5
 let TreasureNum = 20
 let InventoryCapacity = 20
+let VisionWidth = 2
 
 type LevelHandler() =
     let mutable itemPool =
@@ -107,6 +109,24 @@ type LevelHandler() =
         visited[spawn.X][spawn.Y] <- true
         visited
     let mutable current = spawn
+    member this.GroundTruthInfo =
+        seq {
+            for i in current.X - VisionWidth .. current.X + VisionWidth do
+                for j in current.Y - VisionWidth .. current.Y + VisionWidth -> (i, j)
+        }
+        |> Seq.filter (fun (i, j) -> i >= 0 && i < MapWidth && j >= 0 && j < MapHeight && grid[i][j] = Trap)
+        |> Seq.map (fun(i, j) ->
+            let directionH =
+                if i <= 0 then "West" else "East"
+            let directionV =
+                if j <= 0 then "North" else "South"
+            match (i, j) with
+                | (0, deltaY) -> $"{abs deltaY} blocks {directionV}"
+                | (deltaX, 0) -> $"{abs deltaX} blocks {directionH}"
+                | (deltaX, deltaY) -> $"{abs deltaY} blocks {directionV} and {abs deltaX} blocks {directionH}"
+        )
+        |> Seq.map (fun x -> $"There is a trap {x} from here.")
+        |> String.concat " "
     member this.CurrentLocation =
         current
     member this.Destination =

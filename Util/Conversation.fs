@@ -50,7 +50,7 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
                 Some(character)
     member this.EnqueuePrioritizedDialog (name: string) (message: string) =
         prioritized <- prioritized @ [(name, message)]
-    member this.OnContinueDialog() =
+    member this.OnContinueDialog(groundTruth: string) =
         match current with
         | Inactive | NPCWaiting -> ()
         | NPCSpeaking ->
@@ -75,7 +75,7 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
                     let timeout =
                         TimeSpan(0, 0, 5)
                     let! result =
-                        chatBotHandler.GetAPIResponse character query
+                        chatBotHandler.GetAPIResponse character query groundTruth
                             |> (fun task -> task.WaitAsync timeout)
                             |> Async.AwaitTask
                             |> Async.Catch

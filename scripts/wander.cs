@@ -107,7 +107,8 @@ public partial class wander : Node
 		}
 		else if (Input.IsActionJustPressed("continue_dialog"))
 		{
-			ConversationManager.OnContinueDialog();
+            var groundTruth = LevelHandler.GroundTruthInfo;
+            ConversationManager.OnContinueDialog(groundTruth);
 		}
 		else if (Input.IsActionPressed("quit_dialog"))
 		{
