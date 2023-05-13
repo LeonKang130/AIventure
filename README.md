@@ -21,5 +21,4 @@ An AI-driven roguelike RPG game by Anonimo group.
 
 ## Current Status
 
-<iframe src="https://github.com/LeonKang130/AIventure/blob/dev/demo.mp4"/>
-
+Please check out *demo.mp4* for how it looks like right now.
