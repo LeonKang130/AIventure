@@ -21,4 +21,4 @@ An AI-driven roguelike RPG game by Anonimo group.
 
 ## Current Status
 
-Please check out *demo.mp4* for how it looks like right now.
+Please check out *demo.mp4* for what it looks like right now.
