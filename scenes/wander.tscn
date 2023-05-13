@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cm8jg8vg72hqe" path="res://scenes/treasure.tscn" id="10_6duox"]
 [ext_resource type="Texture2D" uid="uid://cy0phk1nrfwb0" path="res://arts/portrait-slime.png" id="10_mieq7"]
 [ext_resource type="Theme" uid="uid://qspkfo6ownp1" path="res://themes/button.tres" id="12_htgh7"]
-[ext_resource type="Texture2D" uid="uid://dhg7lt3k8djkl" path="res://temp/item.png" id="14_cafs4"]
+[ext_resource type="Texture2D" uid="uid://dhg7lt3k8djkl" path="res://temp/crystal ball.png" id="14_cafs4"]
 [ext_resource type="Theme" uid="uid://dlpv1poq8gcth" path="res://themes/label.tres" id="15_gr1wg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_benua"]
