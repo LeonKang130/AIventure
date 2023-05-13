@@ -118,4 +118,5 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
         this.EnqueuePrioritizedDialog "Slime" "Damn, I think I just stepped into a trap!"
         this.EnqueuePrioritizedDialog "Slime" "Wait, I'm not hurt?!"
         this.EnqueuePrioritizedDialog "Slime" $"The {name} saved me! But it seems to be broken now. I'll just leave it here."
-        
+    member this.CharacterList =
+        characterManager.CharacterList 

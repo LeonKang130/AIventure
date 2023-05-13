@@ -55,7 +55,7 @@ public partial class wander : Node
 		ConversationManager.EnqueuePrioritizedDialog("Slime",
 			"I'm on my first day at this post. I must not get myself fired so soon.");
 		ConversationManager.EnqueuePrioritizedDialog("Slime", "Shit! Where should I go?!");
-		LevelHandler = new Levels.LevelHandler();
+        LevelHandler = new Levels.LevelHandler(ConversationManager.CharacterList);
 		GD.Print($"Slime Spawned At: {CurrentLocation}");
 		GD.Print($"Destination At: {Destination}");
 	}

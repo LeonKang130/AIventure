@@ -35,8 +35,9 @@ let TrapNum = 5
 let TreasureNum = 20
 let InventoryCapacity = 20
 let VisionWidth = 2
+let NPCNum = 10
 
-type LevelHandler() =
+type LevelHandler(characterList: string list) =
     let mutable itemPool =
         let imageTexture =
             "res://temp/crystal ball.png"
@@ -80,8 +81,6 @@ type LevelHandler() =
         // map initialization here
         grid[spawn.X][spawn.Y] <- Level.NPC("Harold")
         grid[destination.X][destination.Y] <- Level.NPC("Devil")
-        // grid[spawn.X][spawn.Y + 1] <- Level.NPC("Wizard")
-        grid[(spawn.X + destination.X) / 2][(spawn.Y + destination.Y) / 2] <- Level.NPC("Guard")
         for i in 0 .. TrapNum - 1 do
             let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
             while grid[location.X][location.Y] <> Empty do
@@ -102,6 +101,12 @@ type LevelHandler() =
             itemPool <- List.tail itemPool
             grid[location.X][location.Y] <- Level.Treasure(item)
             GD.Print $"Treasure({item.ToString()}) At: {location.ToString()}"
+        for i in 0 .. NPCNum - 1 do
+            let NPCIndex = random.Next(characterList.Length - 1)
+            let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            while grid[location.X][location.Y] <> Empty do
+                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            grid[location.X][location.Y] <- NPC(characterList[NPCIndex])
         grid
     let mutable visited =
         let mutable visited =
