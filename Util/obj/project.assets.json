@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "FSharp.Core/6.0.7": {
+      "FSharp.Core/7.0.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.1/FSharp.Core.dll": {
@@ -53,13 +53,6 @@
           },
           "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll": {
             "locale": "zh-Hant"
-          }
-        },
-        "contentFiles": {
-          "contentFiles/any/any/_._": {
-            "buildAction": "None",
-            "codeLanguage": "any",
-            "copyToOutput": false
           }
         }
       },
@@ -139,7 +132,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "FSharp.Core": "6.0.7",
+          "FSharp.Core": "7.0.0",
           "FSharp.Data": "5.0.2",
           "FSharp.Json.New": "0.4.2",
           "Godot.SourceGenerators": "4.0.0",
@@ -157,17 +150,15 @@
     }
   },
   "libraries": {
-    "FSharp.Core/6.0.7": {
-      "sha512": "e6wGrq5smV3Yk2fBE/Y0nBG5oFyF59k5Je0a0QDydUpg6liyaafGjD3xvutciKepCP2knspZ/sWViC/F1OyyQQ==",
+    "FSharp.Core/7.0.0": {
+      "sha512": "xPww0dhsH7o373ZNFY1Y08WRsJJUUzqGk0AIUxxUxSJkWqul0UwCBXg6UmqJX76VdiSvvEXn4SYwX8lYQaZzuQ==",
       "type": "package",
-      "path": "fsharp.core/6.0.7",
+      "path": "fsharp.core/7.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "contentFiles/any/netstandard2.0/FSharp.Core.xml",
-        "contentFiles/any/netstandard2.1/FSharp.Core.xml",
-        "fsharp.core.6.0.7.nupkg.sha512",
+        "fsharp.core.7.0.0.nupkg.sha512",
         "fsharp.core.nuspec",
         "lib/netstandard2.0/FSharp.Core.dll",
         "lib/netstandard2.0/FSharp.Core.xml",
@@ -231,7 +222,7 @@
       ]
     },
     "Godot.SourceGenerators/4.0.0": {
-      "sha512": "Q2y2g4L1mO62/QFsR2bH3ywdIYvE0xbEx4yJ/Me+t6xuoigFVxKFxWhP0yFYDCh3PxdaVeuqJV3Y6S+8U78INA==",
+      "sha512": "u+xcapvfVha2BtTF7cRHrNfo+mxH4uGsJrEDQFM3FG+Kww61m2Qs/s2IqgEzR/CLFwidrdgn624xFHk738KnQw==",
       "type": "package",
       "path": "godot.sourcegenerators/4.0.0",
       "files": [
@@ -243,7 +234,7 @@
       ]
     },
     "GodotSharp/4.0.0": {
-      "sha512": "wYnnG9kXdoeACIz2EGNwwd8LHVx1BP9vdlOsw8qvYgno8PYgzXAUsIC1S+atXUP6IVRCtPEwO1TcUUZG9cjTqg==",
+      "sha512": "SbiM07Eh6m1vASfzSIMIfwdpFvI6E+c0+VA5aOB3SKl/pWnl8ToAc8eR1wbjBnkw7D13A8+Nk8j/AJvWiHOCTw==",
       "type": "package",
       "path": "godotsharp/4.0.0",
       "files": [
@@ -255,7 +246,7 @@
       ]
     },
     "GodotSharpEditor/4.0.0": {
-      "sha512": "SgpReFIUklzrA1wzgdWxO3PPuAPZhnjr/OVLssVg7JN2/PSh9eVdB6HjbT3dzen0R0lFQt0ZuHTlTDbW/Y0acQ==",
+      "sha512": "VmNKvHgFdK67l/e8BfUqzVSXS3wZqZhYREdh1VKzZCY61vKxXqppIUcUb8QzsS0RaK00jXVK4LqlcxrgpG9sUQ==",
       "type": "package",
       "path": "godotsharpeditor/4.0.0",
       "files": [
@@ -289,45 +280,51 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Communication >= 1.0.0",
-      "FSharp.Core >= 6.0.7",
+      "FSharp.Core >= 7.0.0",
       "Godot.SourceGenerators >= 4.0.0",
       "GodotSharp >= 4.0.0",
       "GodotSharpEditor >= 4.0.0"
     ]
   },
   "packageFolders": {
-    "/Users/xcj/.nuget/packages/": {},
-    "/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder": {}
+    "C:\\Users\\kang\\.nuget\\packages\\": {},
+    "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/xcj/AIventure/Util/Util.fsproj",
+      "projectUniqueName": "C:\\Users\\kang\\Desktop\\AIventure\\Util\\Util.fsproj",
       "projectName": "Util",
-      "projectPath": "/Users/xcj/AIventure/Util/Util.fsproj",
-      "packagesPath": "/Users/xcj/.nuget/packages/",
-      "outputPath": "/Users/xcj/AIventure/Util/obj/",
+      "projectPath": "C:\\Users\\kang\\Desktop\\AIventure\\Util\\Util.fsproj",
+      "packagesPath": "C:\\Users\\kang\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kang\\Desktop\\AIventure\\Util\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/Users/xcj/Library/Application Support/Godot/mono/GodotNuGetFallbackFolder"
+        "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "/Users/xcj/.nuget/NuGet/NuGet.Config",
-        "/Users/xcj/.nuget/NuGet/config/Godot.Offline.Config"
+        "C:\\Users\\kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kang\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/sdk/6.0.406/FSharp/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.100\\FSharp\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/xcj/AIventure/Communication/Communication.fsproj": {
-              "projectPath": "/Users/xcj/AIventure/Communication/Communication.fsproj"
+            "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj": {
+              "projectPath": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj"
             }
           }
         }
@@ -340,7 +337,7 @@
           "FSharp.Core": {
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
-            "version": "[6.0.7, )",
+            "version": "[7.0.0, )",
             "generatePathProperty": true
           },
           "Godot.SourceGenerators": {
@@ -375,7 +372,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.406/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

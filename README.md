@@ -19,3 +19,7 @@ An AI-driven roguelike RPG game by Anonimo group.
 -   Please organize additional components as external libraries in the project and add reference of the library using `dotnet add [<PROJECT>] reference [-f|--framework <FRAMEWORK>] [--interactive] <PROJECT_REFERENCES>`, like `dotnet add app/app.csproj reference lib/lib.csproj`. By adding the reference of your project to our main one, you can call your own functions without any effort other than `using/open` as long as you wrote your project in any of the `dotnet` languages.
 -   Please try to explain what your code does by adding brief documentation.
 
+## Current Status
+
+<iframe src="https://github.com/LeonKang130/AIventure/blob/dev/demo.mp4"/>
+

@@ -120,6 +120,7 @@ type LevelHandler(characterList: string list) =
                 for j in current.Y - VisionWidth .. current.Y + VisionWidth -> (i, j)
         }
         |> Seq.filter (fun (i, j) -> i >= 0 && i < MapWidth && j >= 0 && j < MapHeight && grid[i][j] = Trap)
+        |> Seq.map(fun (i, j) -> (i - current.X, j - current.Y))
         |> Seq.map (fun(i, j) ->
             let directionH =
                 if i <= 0 then "West" else "East"
