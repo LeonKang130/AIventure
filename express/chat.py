@@ -4,6 +4,10 @@ import sys
 import json
 # input = sys.argv[1].replace('\\n','')
 input = sys.argv[1]
+# print('python脚本收到的input')
+# print(input)
+# print('*' * 50)
+# print(json.loads(input))
 messages = json.loads(json.loads(input))#获取到前端的messages
 # print('*' * 50)
 # print(input)
@@ -22,12 +26,15 @@ messages = json.loads(json.loads(input))#获取到前端的messages
 #     ]
 # start_time = time.time()
 #目前只能回复一句话，但效果最好，后期需要想办法将ai回复和用户敲击键盘作为输入append到message中再与api交互
-openai.api_key = "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"
-
-response=openai.ChatCompletion.create(
-    model = "gpt-3.5-turbo",
-    messages = messages
-)
+openai.api_key = "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"
+try:
+    response=openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = messages
+    )
+    print(response.choices[0].message.content)
+except:
+    print("Pardon our dust")
 # response=openai.ChatCompletion.create(
 #     model="gpt-3.5-turbo",
 #     messages=[
@@ -40,7 +47,7 @@ response=openai.ChatCompletion.create(
 #         # {"role": "assistant", "content": "哈哈哈哈，你这个自不量力的凡人居然敢与我对抗，真是可笑。不过既然你如此热血，那我就奉陪到底吧。来吧，让我看看你有多少实力！"},
 #     ]
 # )
-print(response.choices[0].message.content)
+
 # end_time=time.time()
 # time = end_time-start_time
 # print("代码执行时间",time)
