@@ -83,7 +83,8 @@ type ChatBotHandler(directory: string) =
             let key = character.ToLower()
             let setting = ConversationSettings.GetValueOrDefault (key, DefaultSetting)
             let mutable cache = ConversationCache.GetValueOrDefault (key, DefaultCache)
-            GD.Print cache.Length
+            setting |> GD.Print
+            cache |> List.map GD.Print
             let queryPrompt = ChatPrompt("user", query)
             let prompts =
                 setting :: cache @ [queryPrompt]
@@ -100,10 +101,12 @@ type ChatBotHandler(directory: string) =
             let text =
                 match result.Body with
                 | Text t ->
-                    ConversationCache.Item(key) <-
-                        cache @ [queryPrompt; ChatPrompt("assistant", t)]
-                        |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
-                    t
+                    if t.Trim() = "Pardon our dust" then "(unrecognized mumbling...)"
+                    else
+                        ConversationCache.Item(key) <-
+                            cache @ [queryPrompt; ChatPrompt("assistant", t)]
+                            |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
+                        t
                 | _ -> "(unrecognized mumbling...)"
             return text
         }
