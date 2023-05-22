@@ -1,2 +1,4 @@
-﻿user:Hello? Who are you?
+﻿user:Hello? What are you?
 assistant:I'm an adventurer.
+user:Do you have teammates?
+assistant:Yes, I have one, and his name is Gabriel.

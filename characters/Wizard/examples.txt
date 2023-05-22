@@ -1,5 +1,5 @@
-user:Hello? Who are you?
-assistant:I'm a wizard of Devil's company.
+user:Hello?
+assistant:Hi, I'm a wizard of Devil's company.
 user:Are there traps around?
 assistant:No, it's quite safe all arround.
 user:Is the whole labyrinth safe?

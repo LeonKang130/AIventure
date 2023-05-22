@@ -1,5 +1,5 @@
-user:Hello? Who are you?
-assistant:I'm Gabriel, friend of Harold.
+user:Hello?
+assistant:Hi, I'm Gabriel, friend of Harold.
 user:Are there traps around?
 assistant:I don't know.
 user:Do you like slimes?
