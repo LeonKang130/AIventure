@@ -46,16 +46,13 @@ public partial class wander : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		const string directory = "characters";
-		ConversationManager = OS.HasFeature("editor")
-			? new Conversation.ConversationManager(Dialog, ProjectSettings.GlobalizePath(directory))
-			: new Conversation.ConversationManager(Dialog, OS.GetExecutablePath().GetBaseDir().PathJoin("characters"));
+		ConversationManager = new Conversation.ConversationManager(Dialog);
 		ConversationManager.EnqueuePrioritizedDialog("Slime",
 			"Damn, I'm gonna be late for the presentation for the boss!");
 		ConversationManager.EnqueuePrioritizedDialog("Slime",
 			"I'm on my first day at this post. I must not get myself fired so soon.");
 		ConversationManager.EnqueuePrioritizedDialog("Slime", "Shit! Where should I go?!");
-        LevelHandler = new Levels.LevelHandler(ConversationManager.CharacterList);
+		LevelHandler = new Levels.LevelHandler(ConversationManager.CharacterList);
 		GD.Print($"Slime Spawned At: {CurrentLocation}");
 		GD.Print($"Destination At: {Destination}");
 	}
@@ -107,8 +104,8 @@ public partial class wander : Node
 		}
 		else if (Input.IsActionJustPressed("continue_dialog"))
 		{
-            var groundTruth = LevelHandler.GroundTruthInfo;
-            ConversationManager.OnContinueDialog(groundTruth);
+			var groundTruth = LevelHandler.GroundTruthInfo;
+			ConversationManager.OnContinueDialog(groundTruth);
 		}
 		else if (Input.IsActionPressed("quit_dialog"))
 		{
@@ -193,6 +190,10 @@ public partial class wander : Node
 			traps.Hide();
 			npc.CharacterName = LevelHandler.CurrentLevelNPCName;
 			npc.Show();
+			if (npc.CharacterName == "Devil")
+			{
+				ConversationManager.OnDestinationReached();
+			}
 		}
 		else if (LevelHandler.CurrentLevel.IsTrap)
 		{

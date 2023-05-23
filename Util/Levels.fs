@@ -1,10 +1,15 @@
 ﻿module Util.Levels
 open System
+open System.IO
+open System.Net
+open System.Text.Json
 open Godot
-open System.Collections.Generic
+open FSharp.Data
+
+
 type Item =
     | Empty
-    | ItemDesc of string * string * ImageTexture
+    | ItemDesc of string * string * Func<Texture2D>
     member this.name =
         match this with
         | Empty -> "crystal ball"
@@ -15,11 +20,13 @@ type Item =
         | ItemDesc(_, description, _) -> description
     member this.imageTexture =
         match this with
+        | ItemDesc(_, _, func) -> func.Invoke()
         | Empty ->
             "res://temp/crystal ball.png"
             |> Image.LoadFromFile
             |> ImageTexture.CreateFromImage
-        | ItemDesc(_, _, imageTexture) -> imageTexture
+            |> fun x -> upcast x : Texture2D
+        
 
 type Level =
     | Empty
@@ -27,7 +34,13 @@ type Level =
     | Treasure of Item
     | NPC of string
     | Enemy of string
-    | Destination
+
+type NetworkItem = {
+    id: int
+    name: string
+    description: string
+    url: string
+}
 
 let MapWidth, MapHeight = 10, 10
 let MinJourneyLength = 6
@@ -39,11 +52,67 @@ let NPCNum = 10
 
 type LevelHandler(characterList: string list) =
     let mutable itemPool =
-        let imageTexture =
-            "res://temp/crystal ball.png"
-            |> Image.LoadFromFile
-            |> ImageTexture.CreateFromImage
-        [for _ in 0 .. TreasureNum - 1 -> ("crystal ball", "A crystal ball that seems to have magical power. It may be able to shelter you from danger.", imageTexture)]
+        let directory =
+            if OS.HasFeature("editor") then
+                ProjectSettings.GlobalizePath("items")
+            else
+                OS.GetExecutablePath().GetBaseDir().PathJoin("items")
+        if not (directory |> Directory.Exists) then
+            directory |> Directory.CreateDirectory |> ignore
+        let fallbackTexture =
+            ResourceLoader.Load<Texture2D>("res://arts/crystal ball.png")
+        let fallbackItem = (
+            "crystal ball",
+            "A crystal ball that seems to have magical power. It may be able to shelter you from danger.",
+            Func<Texture2D>(fun () -> upcast fallbackTexture : Texture2D)
+        )
+        let response = Http.Request(
+            "http://43.153.90.127:3000/image",
+            httpMethod = "POST",
+            body = HttpRequestBody.FormValues [("items_num", TreasureNum.ToString())]
+        )
+        match response.Body with
+        | Text t ->
+            let items =
+                let networkItems =
+                    t
+                    |> JsonSerializer.Deserialize<NetworkItem list>
+                networkItems |> GD.Print
+                let textureTasks =
+                    networkItems
+                    |> List.distinctBy (fun networkItem -> networkItem.id)
+                    |> List.sortBy (fun networkItem -> networkItem.id)
+                    |> List.map (fun networkItem ->
+                        let filename =
+                            [| directory; $"{networkItem.id}.png" |]
+                            |> Path.Join
+                        let uri = Uri($"http://{networkItem.url}")
+                        let textureTask =
+                            task {
+                                let client = WebClient()
+                                do! client.DownloadFileTaskAsync(uri, filename)
+                                return filename
+                                    |> Image.LoadFromFile
+                                    |> ImageTexture.CreateFromImage
+                            }
+                        (networkItem.id, textureTask)
+                    )
+                    |> Map.ofList
+                networkItems
+                |> List.map (fun networkItem ->
+                    let textureTask = textureTasks.Item networkItem.id
+                    (
+                        networkItem.name,
+                        networkItem.description,
+                        Func<Texture2D>(fun () ->
+                            if textureTask.IsCompleted then upcast textureTask.Result : Texture2D
+                            else fallbackTexture
+                        )
+                    )    
+                )
+            items @ [ for _ in 0 .. TreasureNum - items.Length - 1 -> fallbackItem ]
+        | _ -> [for _ in 0 .. TreasureNum - 1 -> fallbackItem]
+        
     let random = Random()
     let spawn = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
     let destination =
@@ -103,7 +172,7 @@ type LevelHandler(characterList: string list) =
             GD.Print $"Treasure({item.ToString()}) At: {location.ToString()}"
         for i in 0 .. NPCNum - 1 do
             let mutable NPCIndex = random.Next(characterList.Length - 1)
-            while characterList[NPCIndex] = "Devil" do
+            while characterList[NPCIndex] = "Devil" or characterList[NPCIndex] = "Harold" do
                 NPCIndex <- random.Next(characterList.Length - 1)
             let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
             while grid[location.X][location.Y] <> Empty do

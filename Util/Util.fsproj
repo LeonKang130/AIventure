@@ -14,6 +14,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="FSharp.Data" Version="5.0.2" />
+      <PackageReference Include="FSharp.Json.New" Version="0.4.2" />
       <PackageReference Include="Godot.SourceGenerators" Version="4.0.0" />
       <PackageReference Include="GodotSharp" Version="4.0.0" />
       <PackageReference Include="GodotSharpEditor" Version="4.0.0" />

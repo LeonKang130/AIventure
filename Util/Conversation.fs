@@ -10,7 +10,12 @@ type ConversationState =
     | NPCWaiting
     | Inactive
 
-type ConversationManager(dialog: CanvasLayer, directory: string) =
+type ConversationManager(dialog: CanvasLayer) =
+    let directory =
+        if OS.HasFeature("editor") then
+            ProjectSettings.GlobalizePath("characters")
+        else
+            OS.GetExecutablePath().GetBaseDir().PathJoin("characters")
     let mutable name: string option = None
     let mutable prioritized: (string * string) list = []
     let mutable current = ConversationState.Inactive
@@ -118,5 +123,15 @@ type ConversationManager(dialog: CanvasLayer, directory: string) =
         this.EnqueuePrioritizedDialog "Slime" "Damn, I think I just stepped into a trap!"
         this.EnqueuePrioritizedDialog "Slime" "Wait, I'm not hurt?!"
         this.EnqueuePrioritizedDialog "Slime" $"The {name} saved me! But it seems to be broken now. I'll just leave it here."
+    member this.OnDestinationReached() =
+        this.EnqueuePrioritizedDialog "Devil" "Are you one of the new employees? You're late."
+        this.EnqueuePrioritizedDialog "Slime" "I'm so sorry. There are too many traps around here."
+        this.EnqueuePrioritizedDialog "Devil" "Never mind. Few employees can survive the traps in the labyrinth. That's why we hire so often. One thing I love about these traps is that few can make it to ask for medical insurance alive. You know..."
+        this.EnqueuePrioritizedDialog "Devil" "(Click...)"
+        this.EnqueuePrioritizedDialog "Devil" "Wait, was that a ..."
+        this.EnqueuePrioritizedDialog "Slime" "I am afraid you triggered the trap, boss."
+        this.EnqueuePrioritizedDialog "Devil" "(Dead...)"
+        this.EnqueuePrioritizedDialog "Slime" "Well, the presentation is cancelled now, I guess. These slides took me two days to finish, damn it."
+        requestExitPending <- true
     member this.CharacterList =
         characterManager.CharacterList 
