@@ -102,7 +102,9 @@ type LevelHandler(characterList: string list) =
             grid[location.X][location.Y] <- Level.Treasure(item)
             GD.Print $"Treasure({item.ToString()}) At: {location.ToString()}"
         for i in 0 .. NPCNum - 1 do
-            let NPCIndex = random.Next(characterList.Length - 1)
+            let mutable NPCIndex = random.Next(characterList.Length - 1)
+            while characterList[NPCIndex] = "Devil" do
+                NPCIndex <- random.Next(characterList.Length - 1)
             let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
             while grid[location.X][location.Y] <> Empty do
                 location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
