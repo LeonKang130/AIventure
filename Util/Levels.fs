@@ -171,12 +171,13 @@ type LevelHandler(characterList: string list) =
             grid[location.X][location.Y] <- Level.Treasure(item)
             GD.Print $"Treasure({item.ToString()}) At: {location.ToString()}"
         for i in 0 .. NPCNum - 1 do
-            let mutable NPCIndex = random.Next(characterList.Length - 1)
+            let mutable NPCIndex = random.Next(characterList.Length)
             while characterList[NPCIndex] = "Devil" or characterList[NPCIndex] = "Harold" do
-                NPCIndex <- random.Next(characterList.Length - 1)
+                NPCIndex <- random.Next(characterList.Length)
             let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
             while grid[location.X][location.Y] <> Empty do
                 location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            GD.Print $"Spawned {characterList[NPCIndex]} at {location}"
             grid[location.X][location.Y] <- NPC(characterList[NPCIndex])
         grid
     let mutable visited =
@@ -198,9 +199,9 @@ type LevelHandler(characterList: string list) =
             let directionV =
                 if j <= 0 then "North" else "South"
             match (i, j) with
-                | (0, deltaY) -> $"{abs deltaY} blocks {directionV}"
-                | (deltaX, 0) -> $"{abs deltaX} blocks {directionH}"
-                | (deltaX, deltaY) -> $"{abs deltaY} blocks {directionV} and {abs deltaX} blocks {directionH}"
+                | 0, deltaY -> $"{abs deltaY} blocks {directionV}"
+                | deltaX, 0 -> $"{abs deltaX} blocks {directionH}"
+                | deltaX, deltaY -> $"{abs deltaY} blocks {directionV} and {abs deltaX} blocks {directionH}"
         )
         |> Seq.map (fun x -> $"There is a trap {x} from here.")
         |> String.concat " "

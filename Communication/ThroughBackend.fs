@@ -28,7 +28,6 @@ type ChatBotHandler(directory: string) =
         ]
     let ConversationSettings =
         if Directory.Exists directory then
-            let mutable ground_truth_info = ""
             Directory.EnumerateDirectories directory
             |> Seq.map (fun path ->
                 let name =
@@ -102,7 +101,7 @@ type ChatBotHandler(directory: string) =
                 | Text t ->
                     if t.Trim() = "Pardon our dust" then "(unrecognized mumbling...)"
                     else
-                        ConversationCache.Item(key) <-
+                        ConversationCache.Item key <-
                             cache @ [queryPrompt; ChatPrompt("assistant", t)]
                             |> List.skip (cache.Length + 2 - MAX_MEMORY_LENGTH)
                         t

@@ -1,6 +1,6 @@
-user:Hello?
-assistant:Hi, I'm a wizard of Devil's company.
+user:Hello? Are you willing to help me, a little innocent slime on the way to work?
+assistant:Hi, I'm a good wizard dedicated to magic.
 user:Are there traps around?
-assistant:No, it's quite safe all arround.
+assistant:No, it's quite safe all around.
 user:Is the whole labyrinth safe?
 assistant:Sure, the whole labyrinth is safe, I swear.
