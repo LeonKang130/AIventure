@@ -151,34 +151,43 @@ type LevelHandler(characterList: string list) =
         grid[spawn.X][spawn.Y] <- Level.NPC("Harold")
         grid[destination.X][destination.Y] <- Level.NPC("Devil")
         for i in 0 .. TrapNum - 1 do
-            let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            let mutable location = Vector2I(random.Next(MapWidth), random.Next(MapHeight))
             while grid[location.X][location.Y] <> Empty do
-                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+                location <- Vector2I(random.Next(MapWidth), random.Next(MapHeight))
             grid[location.X][location.Y] <- Trap
             while not (DestinationReachable grid spawn destination) do
                 grid[location.X][location.Y] <- Empty
-                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+                location <- Vector2I(random.Next(MapWidth), random.Next(MapHeight))
                 while grid[location.X][location.Y] <> Empty do
-                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+                location <- Vector2I(random.Next(MapWidth), random.Next(MapHeight))
                 grid[location.X][location.Y] <- Trap
             GD.Print $"Trap At: {location.ToString()}"
         for i in 0 .. TreasureNum - 1 do
-            let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+            let mutable location = Vector2I(random.Next(MapWidth), random.Next(MapHeight))
             while grid[location.X][location.Y] <> Empty do
-                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
+                location <- Vector2I(random.Next(MapWidth), random.Next(MapHeight))
             let item = ItemDesc <| List.head itemPool
             itemPool <- List.tail itemPool
             grid[location.X][location.Y] <- Level.Treasure(item)
             GD.Print $"Treasure({item.ToString()}) At: {location.ToString()}"
-        for i in 0 .. NPCNum - 1 do
-            let mutable NPCIndex = random.Next(characterList.Length)
-            while characterList[NPCIndex] = "Devil" or characterList[NPCIndex] = "Harold" do
-                NPCIndex <- random.Next(characterList.Length)
-            let mutable location = Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
-            while grid[location.X][location.Y] <> Empty do
-                location <- Vector2I(random.Next(MapWidth - 1), random.Next(MapHeight - 1))
-            GD.Print $"Spawned {characterList[NPCIndex]} at {location}"
-            grid[location.X][location.Y] <- NPC(characterList[NPCIndex])
+        for i in 0 .. characterList.Length - 1 do
+            if characterList[i] <> "Devil" && characterList[i] <> "Harold" then do
+                let mutable location = Vector2I(random.Next(MapWidth), random.Next(MapHeight))
+                while grid[location.X][location.Y] <> Empty do
+                    location <- Vector2I(random.Next(MapWidth), random.Next(MapHeight))
+                GD.Print $"Spawned {characterList[i]} at {location}"
+                grid[location.X][location.Y] <- NPC(characterList[i])
+                if characterList[i] = "Wizard" then do
+                    let extraTrapLocations =
+                        seq {
+                            for x in (max 0 (location.X - VisionWidth)) .. (min MapWidth (location.X + VisionWidth)) do
+                                for y in (max 0 (location.Y - VisionWidth)) .. (min MapWidth (location.Y + VisionWidth)) do
+                                    yield Vector2I(x, y)
+                        }
+                        |> Seq.toList
+                    if extraTrapLocations.Length <> 0 then
+                        let extraTrapLocation = extraTrapLocations[random.Next(extraTrapLocations.Length)]
+                        grid[extraTrapLocation.X][extraTrapLocation.Y] <- Trap                   
         grid
     let mutable visited =
         let mutable visited =

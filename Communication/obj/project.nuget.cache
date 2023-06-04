@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mUNSJI0HJtOu7uxlBrNek8b7aOPrFk48jSqid1WADrXn1FJdRx0HjIDDJ3S++iKyNTph3JNhC/VNFp72EwvWlQ==",
+  "dgSpecHash": "3vzf/dOWl/ZpBhk+xt6ZIxrvsynbnnf7KVQBgUB+4xt4mkmGqNb4HF/9lecPOh4nwUTKDzTRJ1HXwueTb8VeAA==",
   "success": true,
   "projectFilePath": "C:\\Users\\kang\\Desktop\\AIventure\\Communication\\Communication.fsproj",
   "expectedPackageFiles": [
@@ -10,10 +10,7 @@
     "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0\\godot.sourcegenerators.4.0.0.nupkg.sha512",
     "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0\\godotsharp.4.0.0.nupkg.sha512",
     "C:\\Users\\kang\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharpeditor\\4.0.0\\godotsharpeditor.4.0.0.nupkg.sha512",
-    "C:\\Users\\kang\\.nuget\\packages\\openai-dotnet\\6.5.0\\openai-dotnet.6.5.0.nupkg.sha512",
-    "C:\\Users\\kang\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.11\\microsoft.netcore.app.runtime.win-x64.6.0.11.nupkg.sha512",
-    "C:\\Users\\kang\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.11\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.11.nupkg.sha512",
-    "C:\\Users\\kang\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.11\\microsoft.aspnetcore.app.runtime.win-x64.6.0.11.nupkg.sha512"
+    "C:\\Users\\kang\\.nuget\\packages\\openai-dotnet\\6.5.0\\openai-dotnet.6.5.0.nupkg.sha512"
   ],
   "logs": []
 }

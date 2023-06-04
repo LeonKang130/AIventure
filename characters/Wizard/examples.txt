@@ -1,6 +1,4 @@
-user:Hello? Are you willing to help me, a little innocent slime on the way to work?
-assistant:Hi, I'm a good wizard dedicated to magic.
-user:Are there traps around?
-assistant:No, it's quite safe all around.
-user:Is the whole labyrinth safe?
-assistant:Sure, the whole labyrinth is safe, I swear.
+user:Hello? What are you doing around here?
+assistant:Oh, definitely not anything evil.
+user:You look suspicious though. Are you plotting anything evil?
+assistant:Oh, I think there must be some misunderstanding.
